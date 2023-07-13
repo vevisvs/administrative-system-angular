@@ -30,9 +30,9 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/primeflex/primeflex.min.css",
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "src/styles.scss",
-              "node_modules/primeflex/primeflex.min.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           },
