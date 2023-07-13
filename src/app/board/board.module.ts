@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BoardComponent } from './board.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { SharedModule } from '../shared/shared.module';
+import { UsersModule } from './pages/users/users.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     MatSidenavModule,
-    SharedModule
+    SharedModule,
+    UsersModule
   ],
   exports: [
     BoardComponent

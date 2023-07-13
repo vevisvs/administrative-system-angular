@@ -1,5 +1,6 @@
-<!--SIDEBAR-->
+<!--LAYOUT APP-->
 <mat-drawer-container class="example-container" autosize>
+  <!--SIDEBAR-->
   <mat-drawer #drawer  example-sidenav mode="over">
     <p>Sidenav</p>
     <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
@@ -8,6 +9,7 @@
     </button>
   </mat-drawer>
 
+  <!--CONTENIDO-->
   <div class="example-sidenav-content">
     <!--BARRA DE NAVEGACION-->
     <mat-toolbar color="primary">
@@ -15,14 +17,12 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
       </button>
       <span>Mi App</span>
-      <!-- <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-      </button> -->
     </mat-toolbar>
+
+    <!--PAGINA USUARIOS-->
+    <div class="p-5">
+      <app-users></app-users>
+    </div>
   </div>
 
 </mat-drawer-container>
