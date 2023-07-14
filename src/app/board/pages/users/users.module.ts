@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { ModalUsersComponent } from './components/modal-users/modal-users.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -13,7 +14,8 @@ import { ModalUsersComponent } from './components/modal-users/modal-users.compon
     ModalUsersComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   exports: [
     UsersComponent
