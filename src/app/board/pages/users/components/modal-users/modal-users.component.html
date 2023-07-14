@@ -1,16 +1,41 @@
 <h1 mat-dialog-title>Formulario para agregar a un alumno</h1>
 <div mat-dialog-content>
-  <!-- <p>What's your favorite animal?</p> -->
-  <!-- <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data">
-  </mat-form-field>-->
+  <div class="card">
+    <form class="formgrid grid">
+      <div >
+        <mat-form-field class="field col">
+          <mat-label>Nombre</mat-label>
+          <input matInput class="text-base text-color surface-overlay p-2 appearance-none outline-none focus:border-primary w-full">
+        </mat-form-field>
 
+        <mat-form-field class="field col">
+          <mat-label>Apellido</mat-label>
+          <input matInput class="text-base text-color surface-overlay p-2 appearance-none outline-none focus:border-primary w-full">
+        </mat-form-field>
 
+        <mat-form-field class="field col">
+          <mat-label>Email</mat-label>
+          <input matInput class="text-base text-color surface-overlay p-2 appearance-none outline-none focus:border-primary w-full">
+        </mat-form-field>
 
+        <mat-form-field class="field col">
+          <mat-label>País</mat-label>
+          <input matInput class="text-base text-color surface-overlay p-2 appearance-none outline-none focus:border-primary w-full">
+        </mat-form-field>
+
+        <mat-form-field class="field col">
+          <mat-label>Teléfono</mat-label>
+          <input matInput class="text-base text-color surface-overlay p-2 appearance-none outline-none focus:border-primary w-full">
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="cancelar()">Cancelar</button>
-  <button mat-button (click)="agregar()">Agregar</button>
-  <!-- <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button> -->
+<div mat-dialog-actions class="flex justify-content-end">
+  <button mat-raised-button color="accent" (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="agregar()">Agregar</button>
 </div>
+
+
+
+
