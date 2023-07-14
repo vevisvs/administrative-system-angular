@@ -1,12 +1,16 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>Formulario para agregar a un alumno</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <!-- <p>What's your favorite animal?</p> -->
   <!-- <mat-form-field>
     <mat-label>Favorite Animal</mat-label>
     <input matInput [(ngModel)]="data">
   </mat-form-field>-->
+
+
+
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="cancelar()">No Thanks</button>
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-button (click)="agregar()">Agregar</button>
   <!-- <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button> -->
 </div>
