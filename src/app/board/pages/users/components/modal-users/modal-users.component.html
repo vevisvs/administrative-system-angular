@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <div class="card">
     <form class="formgrid grid" [formGroup]="formUser">
-      <div >
+      <div class="flex flex-column justify-content-center">
         <mat-form-field class="field col">
           <mat-label>Nombre</mat-label>
           <input matInput
@@ -10,7 +10,9 @@
                   formControlName="name"
                   >
         </mat-form-field>
-
+        <p>{{ getError('name')}}</p>
+      </div>
+      <div class="flex flex-column justify-content-center">
         <mat-form-field class="field col">
           <mat-label>Apellido</mat-label>
           <input matInput
@@ -18,7 +20,10 @@
                   formControlName="lastname"
                   >
         </mat-form-field>
+        <p>{{ getError('lastname')}}</p>
+      </div>
 
+      <div class="flex flex-column justify-content-center">
         <mat-form-field class="field col">
           <mat-label>Email</mat-label>
           <input matInput
@@ -26,7 +31,10 @@
                   formControlName="email"
                  >
         </mat-form-field>
+        <p>{{ getError('email')}}</p>
+      </div>
 
+      <div class="flex flex-column justify-content-center">
         <mat-form-field class="field col">
           <mat-label>País</mat-label>
           <input matInput
@@ -34,7 +42,10 @@
                   formControlName="country"
                 >
         </mat-form-field>
+        <p>{{ getError('country')}}</p>
+      </div>
 
+      <div class="flex flex-column justify-content-center">
         <mat-form-field class="field col">
           <mat-label>Teléfono</mat-label>
           <input matInput
@@ -42,16 +53,14 @@
                   formControlName="phone"
                   >
         </mat-form-field>
+        <p>{{ getError('phone')}}</p>
       </div>
     </form>
   </div>
 </div>
-<div>
-  {{formUser.value | json}}
-</div>
 <div mat-dialog-actions class="flex justify-content-end">
   <button mat-raised-button color="accent" mat-dialog-close (click)="cancelar()">Cancelar</button> <!--directiva para cerrar modal-->
-  <button mat-raised-button color="primary" (click)="agregar()">Agregar</button>
+  <button mat-raised-button color="primary" [disabled]="formUser.invalid" (click)="agregar()">Agregar</button>
 </div>
 
 
