@@ -4,7 +4,7 @@ import { UsersComponent } from './users.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { ModalUsersComponent } from './components/modal-users/modal-users.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +15,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     UsersComponent
