@@ -10,13 +10,13 @@ import { Users } from './models/users';
 })
 export class UsersComponent {
 
-  public alumnos: Users[] = [] //variable para almacenar la lista de alumnos registrados
-  public nextId: number = 1; //variable incremental que funciona como id para la tabla
+  public alumnos: Users[] = []
+  public nextId: number = 1;
 
   constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
-    this.dialog.open(ModalUsersComponent).afterClosed().subscribe({  //me susbscribo al evento de cierre, para escucharlo e implementar una lógica después
+    this.dialog.open(ModalUsersComponent).afterClosed().subscribe({
       next: (result) => {
         if(result){
           console.log(result)
@@ -37,6 +37,26 @@ export class UsersComponent {
         }
       }
     });
+  }
+
+  editUser(userToModify: Users): void {
+    const dialogRef = this.dialog.open(ModalUsersComponent, { data: userToModify });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Usuario modificado:', result);
+        const updatedUserIndex = this.alumnos.findIndex(alumno => alumno.id === userToModify.id);
+        if (updatedUserIndex !== -1) {
+          this.alumnos[updatedUserIndex] = result;
+          this.alumnos = this.alumnos.slice();
+        }
+      } else {
+        console.log('Modificación de usuario cancelada');
+      }
+    });
+  }
+
+  deleteUser(alumnoId: number): void{
+    this.alumnos = this.alumnos.filter(alumno => alumno.id != alumnoId);
   }
 
 }

@@ -1,8 +1,7 @@
-import { Component, Inject, EventEmitter } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Users } from '../../models/users';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Output } from '@angular/core'
 
 @Component({
   selector: 'app-modal-users',
@@ -15,25 +14,35 @@ export class ModalUsersComponent  {
     public dialogRef: MatDialogRef<ModalUsersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Users,
     private fb: FormBuilder
-  ) { }
+  ) {
+    if (this.data) {
+      this.formUser = this.fb.group({
+        name: this.data.name,
+        lastname: this.data.lastname,
+        email: this.data.email,
+        country: this.data.country,
+        phone: this.data.phone
+      });
+    }
+    console.log("modificado:", data)
+   }
 
   formUser = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     lastname: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
     country: ['', [Validators.required]],
-    phone: ['' ,[Validators.required, Validators.pattern('^[0-9]+$')]]
+    phone: [0, [Validators.required, Validators.pattern('^[0-9]+$')]]
   })
 
   cancelar(): void {
-    this.dialogRef.close(); //cierra el form
+    this.dialogRef.close();
   }
 
   agregar(): void{
-    this.dialogRef.close(this.formUser.value); //cierra el form y envia su valor
+    this.dialogRef.close(this.formUser.value);
   }
 
-  //funcion auxiliar para manejar errores del form y enviar mensaje al usuario:
   public getError(inputName: string): string {
     let error = '';
     const control = this.formUser.get(inputName);

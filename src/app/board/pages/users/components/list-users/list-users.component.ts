@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Users } from '../../models/users';
 
 @Component({
@@ -10,6 +10,10 @@ export class ListUsersComponent {
 
   @Input() dataSource: Users[] = [];
 
-  displayedColumns: string[] = ['id', 'name', 'lastname', 'email', 'country', 'phone'];
+  @Output() delete = new EventEmitter();
+
+  @Output() edit = new EventEmitter();
+
+  displayedColumns: string[] = ['id', 'name', 'lastname', 'email', 'country', 'phone', 'options'];
 
 }
