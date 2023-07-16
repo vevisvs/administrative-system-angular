@@ -19,7 +19,9 @@ export class ModalUsersComponent  {
   ) {
     this.isEditMode = !!data;
     if (this.data) {
+      console.log("data:", data)
       this.formUser = this.fb.group({
+        id: this.data.id,
         name: this.data.name,
         lastname: this.data.lastname,
         email: this.data.email,
@@ -31,6 +33,7 @@ export class ModalUsersComponent  {
    }
 
   formUser = this.fb.group({
+    id: [0],
     name: ['', [Validators.required, Validators.minLength(3)]],
     lastname: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
