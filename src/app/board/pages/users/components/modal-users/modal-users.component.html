@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Formulario para agregar a un alumno</h1>
+<h1 mat-dialog-title>{{ isEditMode ? 'Actualización de alumno' : 'Formulario para agregar alumnos' }}</h1>
 <div mat-dialog-content>
   <div class="card">
     <form class="formgrid grid" [formGroup]="formUser">
@@ -60,7 +60,7 @@
 </div>
 <div mat-dialog-actions class="flex justify-content-end">
   <button mat-raised-button color="accent" mat-dialog-close (click)="cancelar()">Cancelar</button> <!--directiva para cerrar modal-->
-  <button mat-raised-button color="primary" [disabled]="formUser.invalid" (click)="agregar()">Agregar</button>
+  <button mat-raised-button color="primary" [disabled]="formUser.invalid" (click)="agregar()">{{ isEditMode ? 'Actualizar' : 'Agregar' }}</button>
 </div>
 
 

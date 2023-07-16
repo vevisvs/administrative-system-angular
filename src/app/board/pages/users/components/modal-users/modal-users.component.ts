@@ -10,11 +10,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 
 export class ModalUsersComponent  {
+  isEditMode: boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<ModalUsersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Users,
     private fb: FormBuilder
   ) {
+    this.isEditMode = !!data;
     if (this.data) {
       this.formUser = this.fb.group({
         name: this.data.name,
