@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Users } from '../../models/users';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-users',
@@ -9,8 +9,9 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./modal-users.component.scss']
 })
 
-export class ModalUsersComponent  {
+export class ModalUsersComponent {
   isEditMode: boolean = false;
+  formUser: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<ModalUsersComponent>,
@@ -18,28 +19,45 @@ export class ModalUsersComponent  {
     private fb: FormBuilder
   ) {
     this.isEditMode = !!data;
-    if (this.data) {
-      console.log("data:", data)
-      this.formUser = this.fb.group({
-        id: this.data.id,
-        name: this.data.name,
-        lastname: this.data.lastname,
-        email: this.data.email,
-        country: this.data.country,
-        phone: this.data.phone
-      });
-    }
-    console.log("modificado:", data)
-   }
+    this.formUser = this.createForm();
 
-  formUser = this.fb.group({
-    id: [0],
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    lastname: ['', [Validators.required, Validators.minLength(2)]],
-    email: ['', [Validators.required, Validators.email]],
-    country: ['', [Validators.required]],
-    phone: [0, [Validators.required, Validators.pattern('^[0-9]+$')]]
-  })
+    if (this.isEditMode) {
+      this.populateForm();
+      this.applyValidations();
+    }
+  }
+
+  createForm(): FormGroup {
+    return this.fb.group({
+      id: [null],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      lastname: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      country: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
+    });
+  }
+
+  populateForm(): void {
+    this.formUser.patchValue({
+      id: this.data.id,
+      name: this.data.name,
+      lastname: this.data.lastname,
+      email: this.data.email,
+      country: this.data.country,
+      phone: this.data.phone
+    });
+  }
+
+  applyValidations(): void {
+    this.formUser.get('name')?.setValidators([Validators.required, Validators.minLength(3)]);
+    this.formUser.get('lastname')?.setValidators([Validators.required, Validators.minLength(2)]);
+    this.formUser.get('email')?.setValidators([Validators.required, Validators.email]);
+    this.formUser.get('country')?.setValidators([Validators.required]);
+    this.formUser.get('phone')?.setValidators([Validators.required, Validators.pattern('^[0-9]+$')]);
+
+    this.formUser.updateValueAndValidity();
+  }
 
   cancelar(): void {
     this.dialogRef.close();
