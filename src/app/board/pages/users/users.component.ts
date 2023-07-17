@@ -11,7 +11,6 @@ import { Users } from './models/users';
 export class UsersComponent {
 
   public alumnos: Users[] = []
-  public nextId: number = 1;
 
   constructor(public dialog: MatDialog) {}
 
@@ -23,7 +22,7 @@ export class UsersComponent {
           this.alumnos = [
             ...this.alumnos,
             {
-                id: this.nextId++,
+                id: Date.now() + Math.floor(Math.random() * 1000),
                 name: result.name,
                 lastname: result.lastname,
                 email: result.email,

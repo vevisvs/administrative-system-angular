@@ -14,6 +14,6 @@ export class ListUsersComponent {
 
   @Output() edit = new EventEmitter();
 
-  displayedColumns: string[] = ['id', 'name', 'lastname', 'email', 'country', 'phone', 'options'];
+  displayedColumns: string[] = ['id', 'fulldata', 'email', 'country', 'phone', 'options'];
 
 }

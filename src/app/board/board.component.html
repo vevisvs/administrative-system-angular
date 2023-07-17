@@ -2,7 +2,7 @@
 <mat-drawer-container class="example-container" autosize>
   <!--SIDEBAR-->
   <mat-drawer #drawer  example-sidenav mode="over">
-    <p>Sidenav</p>
+    <p appFontsize>Menú</p>
     <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
     <button mat-raised-button color="primary" (click)="showFiller = !showFiller">
       Toggle text
@@ -16,7 +16,7 @@
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
       </button>
-      <span>Mi App</span>
+      <span appFontsize>App administrativa de cursos</span>
     </mat-toolbar>
 
     <!--PAGINA USUARIOS-->
