@@ -13,9 +13,11 @@ import { Observable } from 'rxjs';
 export class UsersComponent {
 
   alumnos$: Observable<Users[]>;
+  totalUsers = 0;
 
   constructor(public dialog: MatDialog, private userService: UserService) {
       this.alumnos$ = this.userService.getUsers();
+      this.usersCount();
   };
 
   openDialog(): void {
@@ -52,6 +54,13 @@ export class UsersComponent {
 
   deleteUser(userId: number): void{
     this.userService.onDelete(userId);
+  }
+
+  usersCount(){
+    this.userService.getTotal().subscribe({
+      next: result =>
+      this.totalUsers = result
+    });
   }
 
 
