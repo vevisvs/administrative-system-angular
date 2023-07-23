@@ -1,3 +1,6 @@
 <button mat-raised-button color="primary" (click)="openDialog()">Agregar alumno</button>
-<app-list-users [dataSource]="alumnos" (edit)="editUser($event)" (delete)="deleteUser($event)"></app-list-users>
+<ng-container *ngIf="alumnos$ | async as alumnos">
+  <app-list-users [dataSource]="alumnos" (edit)="editUser($event)" (delete)="deleteUser($event)"></app-list-users>
+</ng-container>
+
 
