@@ -5,3 +5,10 @@ export interface Admin {
   email: string,
   password: string
 }
+
+export interface DialogData {
+  name: string;
+  lastname: string;
+  email: string;
+  password: string
+}

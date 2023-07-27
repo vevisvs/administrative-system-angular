@@ -1,2 +1,5 @@
-<button mat-raised-button color="primary">Agregar Administrador</button>
-<app-list-admins [dataSource]="dataSource"></app-list-admins>
+<button mat-raised-button color="primary" (click)="add()">Agregar Administrador</button>
+<ng-container *ngIf="admins$ | async as administrators" >
+  <app-list-admins [dataSource]="administrators"></app-list-admins>
+</ng-container>
+
