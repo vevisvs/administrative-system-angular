@@ -1,2 +1,13 @@
-<p>detail-users works!</p>
-<button mat-raised-button color="primary" (click)="goBack()">Volver</button>
+<button mat-raised-button color="primary" class="btn-back" (click)="goBack()">Volver</button>
+<h2>Detalle del alumno</h2>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-subtitle>ID: {{userDetail?.id}}</mat-card-subtitle>
+    <mat-card-title>{{userDetail?.name}} {{userDetail?.lastname}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80">
+  <mat-card-subtitle>Email: {{userDetail?.email}}</mat-card-subtitle>
+  <mat-card-subtitle>Contacto: {{userDetail?.phone}}</mat-card-subtitle>
+  <mat-card-subtitle>Ubicación: {{userDetail?.country}}</mat-card-subtitle>
+</mat-card>

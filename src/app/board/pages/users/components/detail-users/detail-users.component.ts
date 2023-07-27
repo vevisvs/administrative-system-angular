@@ -10,12 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./detail-users.component.scss']
 })
 export class DetailUsersComponent {
-  userDetails: Users | undefined;
+  userDetail: Users | undefined;
 
   constructor(private route: Router, private rutaActiva: ActivatedRoute, private userService: UserService){}
 
   ngOnInit(): void{
-
+    const userId = this.rutaActiva.snapshot.paramMap.get('id');
+    if (userId){
+      const idUser = parseInt(userId, 10);
+      this.userService.getUserById(idUser).subscribe(u => {
+        this.userDetail = u;
+        console.log("detalle del usuario:", this.userDetail)
+      })
+    }
   }
 
   goBack(): void{
