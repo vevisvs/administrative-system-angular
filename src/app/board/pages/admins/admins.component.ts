@@ -11,6 +11,5 @@ const ELEMENT_DATA: Admin[] = [
   styleUrls: ['./admins.component.scss']
 })
 export class AdminsComponent {
-
   dataSource = ELEMENT_DATA;
 }
