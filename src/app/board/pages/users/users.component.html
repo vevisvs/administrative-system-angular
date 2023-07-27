@@ -3,7 +3,7 @@
   <span>Cantidad de alumnos: {{totalUsers}} </span>
 </div>
 <ng-container *ngIf="alumnos$ | async as alumnos">
-  <app-list-users [dataSource]="alumnos" (edit)="editUser($event)" (delete)="deleteUser($event)"></app-list-users>
+  <app-list-users [dataSource]="alumnos" (edit)="editUser($event)" (delete)="deleteUser($event)" ></app-list-users>
 </ng-container>
 
 

@@ -11,8 +11,8 @@ export class ListUsersComponent {
   @Input() dataSource: Users[] = [];
 
   @Output() delete = new EventEmitter();
-
   @Output() edit = new EventEmitter();
+  @Output() goDetails = new EventEmitter();
 
   displayedColumns: string[] = ['id', 'fulldata', 'email', 'country', 'phone', 'options'];
 

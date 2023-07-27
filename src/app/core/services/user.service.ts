@@ -22,6 +22,13 @@ export class UserService {
     );
   }
 
+  getUserById(userId: number): Observable<Users | undefined>{
+    console.log("detalle del usuario:", userId)
+    return this.users$.pipe(
+      map(users => users.find(user => user.id === userId))
+    );
+  }
+
   addUser(user: Users): void{
     this.users = [...this.users, user]
     this.users$.next(this.users)
@@ -40,6 +47,7 @@ export class UserService {
     this.users = [...filteredUsers];
     this.users$.next(filteredUsers);
   }
+
 
 }
 

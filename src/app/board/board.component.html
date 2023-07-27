@@ -1,12 +1,13 @@
 <!--LAYOUT APP-->
 <mat-drawer-container class="example-container" autosize>
   <!--SIDEBAR-->
-  <mat-drawer #drawer  example-sidenav mode="over">
-    <p appFontsize>Menú</p>
-    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-    <button mat-raised-button color="primary" (click)="showFiller = !showFiller">
-      Toggle text
-    </button>
+  <mat-drawer #drawer  class="example-sidenav" mode="side">
+    <mat-nav-list>
+      <a routerLink="home" routerLinkActive="mat-list-item-active" mat-list-item>Inicio</a>
+      <a routerLink="users" routerLinkActive="mat-list-item-active" mat-list-item>Usuarios</a>
+      <a routerLink="courses" routerLinkActive="mat-list-item-active" mat-list-item>Cursos</a>
+      <a routerLink="admins" routerLinkActive="mat-list-item-active" mat-list-item>Admin</a>
+    </mat-nav-list>
   </mat-drawer>
 
   <!--CONTENIDO-->
@@ -19,10 +20,9 @@
       <span appFontsize>App administrativa de cursos</span>
     </mat-toolbar>
 
-    <!--PAGINA USUARIOS-->
+    <!--PAGINAS-->
     <div class="p-5">
-      <app-users></app-users>
+      <router-outlet></router-outlet>
     </div>
   </div>
-
 </mat-drawer-container>

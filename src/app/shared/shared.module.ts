@@ -6,9 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import {MatListModule} from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FulldataPipe } from './pipes/fulldata.pipe';
 import { FontsizeDirective } from './directives/fontsize.directive';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -27,8 +29,10 @@ import { FontsizeDirective } from './directives/fontsize.directive';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
     FulldataPipe,
-    FontsizeDirective
+    FontsizeDirective,
+    RouterModule
   ]
 })
 export class SharedModule { }
