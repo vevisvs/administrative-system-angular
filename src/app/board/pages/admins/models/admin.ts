@@ -12,3 +12,11 @@ export interface DialogData {
   email: string;
   password: string
 }
+
+export interface DataEdit{
+  id?: number,
+  name: string,
+  lastname: string,
+  email: string,
+  password: string
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { Admin, DialogData } from './models/admin';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -44,5 +44,20 @@ export class AdminsComponent implements OnInit{
 
   delete(adminId: number): void{
     this.adminService.deleteAdmin(adminId)
+  }
+
+  edit(admin: Admin): void{
+    console.log("usuario a modificar:", admin)
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {...admin}
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (adminModificated) => {
+        if(adminModificated){
+          this.adminService.editAdmin(adminModificated)
+          console.log("user modificado:", adminModificated)
+        }
+      }
+    })
   }
 }
