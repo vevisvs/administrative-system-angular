@@ -10,7 +10,7 @@ export class AdminService {
   constructor() { }
 
   private adminUsers: Admin[] = [
-    {id: 1980346700, name: 'Adriana', lastname: "Canal", email: "adri@example.com", password: "123456789"},
+    {id: 1980346700211, name: 'Adriana', lastname: "Canal", email: "adri@example.com", password: "123456789"},
   ];
 
   private administrators$: BehaviorSubject<Admin[]> = new BehaviorSubject<Admin[]>(this.adminUsers);
@@ -21,6 +21,11 @@ export class AdminService {
 
   addAdmin(userAdmin: Admin): void{
     this.adminUsers = [...this.adminUsers, userAdmin];
+    this.administrators$.next(this.adminUsers);
+  }
+
+  deleteAdmin(adminId: number): void{
+    this.adminUsers = this.adminUsers.filter((admin) => admin.id !== adminId);
     this.administrators$.next(this.adminUsers);
   }
 }

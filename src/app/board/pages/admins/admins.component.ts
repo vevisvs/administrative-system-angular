@@ -33,12 +33,16 @@ export class AdminsComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       this.dataAdmin = result;
       this.adminService.addAdmin({
-        id: Date.now() + Math.random() * 999,
+        id: Date.now() + Math.floor(Math.random() * 1000),
         name: result.name,
         lastname: result.lastname,
-        email: result.emiail,
+        email: result.email,
         password: result.password
       })
     });
+  }
+
+  delete(adminId: number): void{
+    this.adminService.deleteAdmin(adminId)
   }
 }
