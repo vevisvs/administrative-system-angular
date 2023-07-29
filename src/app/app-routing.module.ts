@@ -6,6 +6,7 @@ import { HomeComponent } from './board/pages/home/home.component';
 import { AdminsComponent } from './board/pages/admins/admins.component';
 import { CoursesComponent } from './board/pages/courses/courses.component';
 import { DetailUsersComponent } from './board/pages/users/components/detail-users/detail-users.component';
+import { DetailAdminComponent } from './board/pages/admins/components/detail-admin/detail-admin.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       },
       {
         path: "admins", component: AdminsComponent
+      },
+      {
+        path: "admins/:id",
+        component: DetailAdminComponent
       },
       {
         path: "courses", component: CoursesComponent

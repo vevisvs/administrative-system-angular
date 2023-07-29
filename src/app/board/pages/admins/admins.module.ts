@@ -5,13 +5,15 @@ import { ListAdminsComponent } from './components/list-admins/list-admins.compon
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetailAdminComponent } from './components/detail-admin/detail-admin.component';
 
 
 @NgModule({
   declarations: [
     AdminsComponent,
     ListAdminsComponent,
-    DialogComponent
+    DialogComponent,
+    DetailAdminComponent
   ],
   imports: [
     CommonModule,

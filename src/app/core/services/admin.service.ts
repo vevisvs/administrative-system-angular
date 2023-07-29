@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Admin } from 'src/app/board/pages/admins/models/admin';
-import { BehaviorSubject, Observable} from 'rxjs';
+import { BehaviorSubject, Observable, map} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +37,9 @@ export class AdminService {
       this.administrators$.next([...this.adminUsers]);
       console.log('Usuario editado correctamente. Datos actualizados:', this.adminUsers);
     }
+  }
+
+  getAdminById(adminId: number): Observable<Admin | undefined>{
+    return this.administrators$.pipe(map(admin => admin.find(user => user.id === adminId)))
   }
 }

@@ -10,15 +10,16 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class DialogComponent {
   adminForm: FormGroup;
+  formToEdit: Boolean = false;
 
   constructor(public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DataEdit,
     private fb: FormBuilder){
       this.adminForm = this.fb.group({
-        name: [data ? data.name : '', Validators.required],
-        lastname: [data ? data.lastname : '', Validators.required],
+        name: [data ? data.name : '', [Validators.required, Validators.minLength(3)]],
+        lastname: [data ? data.lastname : '', [Validators.required, Validators.minLength(2)]],
         email: [data ? data.email : '', [Validators.required, Validators.email]],
-        password: [data ? data.password : '', [Validators.required, Validators.minLength(6)]]
+        password: [data ? data.password : '', [Validators.required, Validators.minLength(7)]]
       })
     }
 
@@ -34,5 +35,7 @@ export class DialogComponent {
       this.dialogRef.close(this.adminForm.value)
     }
   }
+
+
 
 }
