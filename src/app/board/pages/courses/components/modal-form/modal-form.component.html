@@ -1,1 +1,40 @@
-<p>modal-form works!</p>
+
+<h2 mat-dialog-title>Agrega un curso</h2>
+<div mat-dialog-content>
+  <form [formGroup]="coursesForm" class="grid">
+    <div class="field-grid">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Nombre del curso</label>
+      <div class="col-12 field" >
+        <mat-form-field class="w-full">
+          <input class="text-base text-color surface-overlay p-2 w-full h-full" matInput type="text" placeholder="Nombre" [formControl]="titleControl" required>
+        </mat-form-field>
+        <mat-error *ngIf="titleControl.touched && titleControl.invalid">{{getErrorMessage(titleControl)}}</mat-error>
+      </div>
+    </div>
+
+    <div class="field-grid">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Fecha de inicio</label>
+      <div class="col-12 field">
+        <mat-form-field class="w-full">
+          <input class="text-base text-color surface-overlay p-2 w-full h-full" matInput type="date" placeholder="fecha de inicio" [formControl]="startDateControl" required>
+        </mat-form-field>
+        <mat-error *ngIf="startDateControl.touched && startDateControl.invalid">{{getErrorMessage(startDateControl)}}</mat-error>
+      </div>
+    </div>
+
+    <div class="field-grid">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Fecha de culminación</label>
+      <div class="col-12 field">
+        <mat-form-field class="w-full">
+          <input class="text-base text-color surface-overlay p-2 w-full h-full" matInput type="date" placeholder="fecha de culminación" [formControl]="finalDateControl" required>
+        </mat-form-field>
+        <mat-error *ngIf="finalDateControl.touched && finalDateControl.invalid">{{getErrorMessage(finalDateControl)}}</mat-error>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="flex justify-content-end" mat-dialog-actions>
+  <button mat-raised-button color="accent" mat-dialog-close>Cancelar</button>
+  <button (click)="submitForm()" type="submit" mat-raised-button color="primary">Guardar</button>
+</div>
+

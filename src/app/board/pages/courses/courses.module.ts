@@ -4,7 +4,8 @@ import { CoursesComponent } from './courses.component';
 import { TableCoursesComponent } from './components/table-courses/table-courses.component';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CoursesModule { }

@@ -1,8 +1,6 @@
 import { Component, Input, Output} from '@angular/core';
 import { Course } from '../../models/course';
 
-
-
 @Component({
   selector: 'app-table-courses',
   templateUrl: './table-courses.component.html',
