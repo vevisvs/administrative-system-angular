@@ -10,6 +10,6 @@ export class TableCoursesComponent {
 
   @Input() dataSource: Course[] = [];
 
-  displayedColumns: string[] = ['ID', 'Título', 'Fecha de inicio', 'Fecha de culminación'];
+  displayedColumns: string[] = ['ID', 'Título', 'Fecha de inicio', 'Fecha de culminación', 'Opciones'];
 
 }

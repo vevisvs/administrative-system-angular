@@ -12,7 +12,7 @@ export class ModalFormComponent {
   constructor(private dialogRef: MatDialogRef<ModalFormComponent>,
      @Inject(MAT_DIALOG_DATA) public data: Course){}
 
-    titleControl = new FormControl<string | null>('', [Validators.required, Validators.minLength(5)]);
+    titleControl = new FormControl<string | null>('', [Validators.required, Validators.minLength(4)]);
     startDateControl = new FormControl<string | null>('', [Validators.required]);
     finalDateControl = new FormControl<string | null>('', [Validators.required]);
 
@@ -29,7 +29,7 @@ export class ModalFormComponent {
         if(formControl.hasError('required')){
           return'El campo es requerido';
         } else if(formControl.hasError('minlength')){
-          return 'El campo debe tener mínimo 5 caracteres'
+          return 'El campo debe tener mínimo 4 caracteres'
         }
         break;
       case this.startDateControl:

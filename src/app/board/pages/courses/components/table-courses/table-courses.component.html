@@ -1,27 +1,32 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-  <!-- Position Column -->
   <ng-container matColumnDef="ID">
     <th mat-header-cell *matHeaderCellDef>ID</th>
     <td mat-cell *matCellDef="let course"> {{course.id}} </td>
   </ng-container>
 
-  <!-- Name Column -->
   <ng-container matColumnDef="Título">
     <th mat-header-cell *matHeaderCellDef>Título del curso </th>
     <td mat-cell *matCellDef="let course"> {{course.title}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
   <ng-container matColumnDef="Fecha de inicio">
     <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
     <td mat-cell *matCellDef="let course"> {{course.startDate}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
   <ng-container matColumnDef="Fecha de culminación">
     <th mat-header-cell *matHeaderCellDef> Fecha de culminación </th>
     <td mat-cell *matCellDef="let course"> {{course.finalDate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Opciones">
+    <th mat-header-cell *matHeaderCellDef appFontsize>Opciones</th>
+    <td mat-cell *matCellDef="let course">
+      <button mat-raised-button color="primary">Editar</button>
+      <button mat-raised-button color="warn">Eliminar</button>
+      <button mat-raised-button color="accent">Ver detalle</button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
