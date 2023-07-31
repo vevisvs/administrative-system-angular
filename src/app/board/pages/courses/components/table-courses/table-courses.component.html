@@ -23,8 +23,8 @@
   <ng-container matColumnDef="Opciones">
     <th mat-header-cell *matHeaderCellDef appFontsize>Opciones</th>
     <td mat-cell *matCellDef="let course">
-      <button mat-raised-button color="primary">Editar</button>
-      <button mat-raised-button color="warn">Eliminar</button>
+      <button mat-raised-button color="primary" (click)="this.update.emit(course)">Editar</button>
+      <button mat-raised-button color="warn" (click)="this.eliminate.emit(course.id)">Eliminar</button>
       <button mat-raised-button color="accent">Ver detalle</button>
     </td>
   </ng-container>

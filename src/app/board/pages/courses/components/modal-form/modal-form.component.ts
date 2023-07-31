@@ -22,6 +22,16 @@ export class ModalFormComponent {
     finalDate: this.finalDateControl
   })
 
+  dataToEdit: Boolean = false;
+
+  ngOnInit(): void {
+    if (this.data) {
+      this.dataToEdit = true;
+      this.titleControl.setValue(this.data.title);
+      this.startDateControl.setValue(this.data.startDate);
+      this.finalDateControl.setValue(this.data.finalDate)
+    }
+  }
 
   getErrorMessage(formControl: FormControl): string{
     switch (formControl) {
@@ -49,6 +59,12 @@ export class ModalFormComponent {
   }
 
   submitForm(): void{
-    this.dialogRef.close(this.coursesForm.value);
+    if(this.data.id){
+      const id = {id: this.data.id}
+      const dataUpdated = {...this.coursesForm.value, ...id}
+      this.dialogRef.close(dataUpdated)
+    } else {
+      this.dialogRef.close(this.coursesForm.value);
+    }
   }
 }

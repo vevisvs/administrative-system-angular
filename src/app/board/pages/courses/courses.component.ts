@@ -20,9 +20,7 @@ export class CoursesComponent implements OnInit{
     this.courses = this.courseService.getCourses();
   }
 
-
   addCourse(): void{
-    console.log("Agrego curso y abro el modal");
     this.dialog.open(ModalFormComponent)
       .afterClosed().subscribe({
         next: (value) => {
@@ -37,4 +35,21 @@ export class CoursesComponent implements OnInit{
       })
   }
 
+  eliminate(courseId: number): void{
+    this.courseService.toDelete(courseId)
+  }
+
+
+  update(course: Course): void{
+   this.dialog.open(ModalFormComponent,
+      {data: course}).afterClosed().subscribe(value => {
+        this.courseService.toUpdate(value);
+      }
+    )
+  }
+
 }
+
+
+
+

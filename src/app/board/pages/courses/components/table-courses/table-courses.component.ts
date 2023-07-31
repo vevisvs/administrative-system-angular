@@ -1,4 +1,4 @@
-import { Component, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { Course } from '../../models/course';
 
 @Component({
@@ -9,6 +9,8 @@ import { Course } from '../../models/course';
 export class TableCoursesComponent {
 
   @Input() dataSource: Course[] = [];
+  @Output() update = new EventEmitter();
+  @Output() eliminate = new EventEmitter();
 
   displayedColumns: string[] = ['ID', 'Título', 'Fecha de inicio', 'Fecha de culminación', 'Opciones'];
 
