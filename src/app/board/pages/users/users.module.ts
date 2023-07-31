@@ -6,7 +6,8 @@ import { ModalUsersComponent } from './components/modal-users/modal-users.compon
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailUsersComponent } from './components/detail-users/detail-users.component';
-
+import { UsersRoutingModule } from './users-routing-module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { DetailUsersComponent } from './components/detail-users/detail-users.com
     CommonModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UsersRoutingModule,
+    RouterModule
   ],
   exports: [
     UsersComponent

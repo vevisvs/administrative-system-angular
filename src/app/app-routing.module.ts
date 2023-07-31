@@ -1,52 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './board/board.component';
-import { UsersComponent } from './board/pages/users/users.component';
-import { HomeComponent } from './board/pages/home/home.component';
-import { AdminsComponent } from './board/pages/admins/admins.component';
-import { CoursesComponent } from './board/pages/courses/courses.component';
-import { DetailUsersComponent } from './board/pages/users/components/detail-users/detail-users.component';
-import { DetailAdminComponent } from './board/pages/admins/components/detail-admin/detail-admin.component';
-import { InfoDetailComponent } from './board/pages/courses/components/info-detail/info-detail.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 const routes: Routes = [
   {
     path: "board",
     component: BoardComponent,
-    children: [
-      {
-        path: "home", component: HomeComponent
-      },
-      {
-        path: "users",
-        component: UsersComponent,
-      },
-      {
-        path: "users/:id",
-        component: DetailUsersComponent
-      },
-      {
-        path: "admins", component: AdminsComponent
-      },
-      {
-        path: "admins/:id",
-        component: DetailAdminComponent
-      },
-      {
-        path: "courses", component: CoursesComponent
-      },
-      {
-        path: "courses/:id", component: InfoDetailComponent
-      },
-      {
-        path: "**",
-        redirectTo: "home"
-      }
-    ]
+    loadChildren: () => import('../app/board/board.module').then((m) => m.BoardModule)
+  },
+  {
+    path: "authentication",
+    component: AuthenticationComponent,
+    loadChildren: () => import('./authentication/authentication.module').then((m) => m.AuthenticationModule)
   },
   {
     path: "**",
-    redirectTo: "board"
+    redirectTo: "/authentication/login",
   }
 ];
 

@@ -6,7 +6,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailAdminComponent } from './components/detail-admin/detail-admin.component';
-
+import { AdminsRoutingModule } from './admins-routing.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { DetailAdminComponent } from './components/detail-admin/detail-admin.com
     CommonModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AdminsRoutingModule,
+    RouterModule
   ],
   exports: [
     AdminsComponent

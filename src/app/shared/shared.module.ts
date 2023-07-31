@@ -11,7 +11,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { FulldataPipe } from './pipes/fulldata.pipe';
 import { FontsizeDirective } from './directives/fontsize.directive';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import { RouterModule } from '@angular/router';
     MatCardModule,
     FulldataPipe,
     FontsizeDirective,
-    RouterModule
   ]
 })
 export class SharedModule { }

@@ -7,6 +7,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InfoDetailComponent } from './components/info-detail/info-detail.component';
+import { CoursesRoutingModule } from './courses-routing.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { InfoDetailComponent } from './components/info-detail/info-detail.compon
     CommonModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoursesRoutingModule,
+    RouterModule
   ]
 })
 export class CoursesModule { }
