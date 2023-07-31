@@ -6,12 +6,14 @@ import { ModalFormComponent } from './components/modal-form/modal-form.component
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InfoDetailComponent } from './components/info-detail/info-detail.component';
 
 @NgModule({
   declarations: [
     CoursesComponent,
     TableCoursesComponent,
-    ModalFormComponent
+    ModalFormComponent,
+    InfoDetailComponent
   ],
   imports: [
     CommonModule,

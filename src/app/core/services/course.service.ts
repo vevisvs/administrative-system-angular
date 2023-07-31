@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, take } from 'rxjs';
+import { BehaviorSubject, Observable, map, take } from 'rxjs';
 import { Course } from 'src/app/board/pages/courses/models/course';
 
 @Injectable({
@@ -39,6 +39,12 @@ export class CourseService {
       this.courses[id] = {...this.courses[id], ...course};
       this.courses$.next([...this.courses]);
     }
+  }
+
+  getCourseById(courseId: number): Observable<Course | undefined>{
+    return this.courses$.pipe(
+      map(courses => courses.find(course => course.id === courseId))
+    );
   }
 }
 
