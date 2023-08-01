@@ -8,11 +8,11 @@ import { RegisterComponent } from "./pages/register/register.component";
   imports: [
     RouterModule.forChild([
       {
-        path: "login",
+        path: 'login',
         component: LoginComponent
       },
       {
-        path: "register",
+        path: 'register',
         component: RegisterComponent
       }
     ])

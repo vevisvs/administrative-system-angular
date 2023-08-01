@@ -5,18 +5,18 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 
 const routes: Routes = [
   {
-    path: "board",
+    path: 'board',
     component: BoardComponent,
-    loadChildren: () => import('../app/board/board.module').then((m) => m.BoardModule)
+    loadChildren: () => import('./board/board.module').then(m => m.BoardModule)
   },
   {
-    path: "authentication",
+    path: 'authentication',
     component: AuthenticationComponent,
-    loadChildren: () => import('./authentication/authentication.module').then((m) => m.AuthenticationModule)
+    loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
   },
   {
-    path: "**",
-    redirectTo: "/authentication/login",
+    path: '**',
+    redirectTo: '/authentication/login',
   }
 ];
 

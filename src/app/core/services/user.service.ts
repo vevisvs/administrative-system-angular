@@ -8,7 +8,10 @@ import { BehaviorSubject, map } from 'rxjs';
 })
 export class UserService {
 
-  private users: Users[] = []
+  private users: Users[] = [
+    {id: 918762346, name: 'Christian', lastname: 'Paz', email: "chris@example.com", country: "Uruguay", phone: "096456123"},
+    {id: 934672348, name: 'Mariobel', lastname: 'Gelvis', email: "mari@example.com", country: "Chile", phone: "099756845"}
+  ]
 
   private users$: BehaviorSubject<Users[]> = new BehaviorSubject<Users[]>(this.users);
 

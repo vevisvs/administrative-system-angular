@@ -35,8 +35,8 @@
     <th mat-header-cell *matHeaderCellDef appFontsize>Opciones</th>
     <td mat-cell *matCellDef="let alumno">
       <button mat-raised-button color="primary" (click)="this.edit.emit(alumno)">Editar</button>
-      <button mat-raised-button color="accent" (click)="this.delete.emit(alumno.id)">Eliminar</button>
-      <button mat-stroked-button [routerLink]="alumno.id">Ver detalle</button>
+      <button mat-raised-button color="warn" (click)="this.delete.emit(alumno.id)">Eliminar</button>
+      <!-- <button mat-stroked-button color="accent" [routerLink]="alumno.id">Ver detalle</button> -->
     </td>
   </ng-container>
 

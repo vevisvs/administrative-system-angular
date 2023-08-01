@@ -7,23 +7,23 @@
   </ng-container>
 
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <th mat-header-cell *matHeaderCellDef appFontsize> Nombre </th>
     <td mat-cell *matCellDef="let admin"> {{admin.name}} </td>
   </ng-container>
 
 
   <ng-container matColumnDef="lastname">
-    <th mat-header-cell *matHeaderCellDef> Apellido </th>
+    <th mat-header-cell *matHeaderCellDef appFontsize> Apellido </th>
     <td mat-cell *matCellDef="let admin"> {{admin.lastname}} </td>
   </ng-container>
 
   <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <th mat-header-cell *matHeaderCellDef appFontsize> Email </th>
     <td mat-cell *matCellDef="let admin"> {{admin.email}} </td>
   </ng-container>
 
   <ng-container matColumnDef="password">
-    <th mat-header-cell *matHeaderCellDef> Contraseña </th>
+    <th mat-header-cell *matHeaderCellDef appFontsize> Contraseña </th>
     <td mat-cell *matCellDef="let admin"> {{admin.password}} </td>
   </ng-container>
 
@@ -32,7 +32,7 @@
     <td mat-cell *matCellDef="let admin">
       <button mat-raised-button color="primary" (click)="this.edit.emit(admin)">Editar</button>
       <button mat-raised-button color="warn" (click)="this.delete.emit(admin.id)">Eliminar</button>
-      <button mat-raised-button color="accent" [routerLink]="admin.id">Ver detalle</button>
+      <!-- <button mat-raised-button color="accent" [routerLink]="admin.id">Ver detalle</button> -->
     </td>
   </ng-container>
 

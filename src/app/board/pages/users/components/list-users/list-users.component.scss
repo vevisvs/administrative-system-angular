@@ -6,3 +6,11 @@ table{
 h2{
   margin-top: 1rem;
 }
+
+.mdc-data-table__header-cell, .mdc-data-table__cell{
+  text-align: center;
+}
+
+button{
+  margin: 0 0.8rem 0 0.8rem;
+}

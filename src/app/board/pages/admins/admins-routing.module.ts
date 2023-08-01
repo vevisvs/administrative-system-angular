@@ -10,13 +10,14 @@ import { CommonModule } from "@angular/common";
     CommonModule,
     RouterModule.forChild([
       {
-        path: "",
-        component: AdminsComponent
+        path: '',
+        component: AdminsComponent,
+        pathMatch: 'full'
       },
-      {
-        path: ":id",
-        component: DetailAdminComponent
-      }
+      // {
+      //   path: ':id',
+      //   component: DetailAdminComponent
+      // }
     ])
   ],
   exports: [RouterModule]
