@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="field-grid">
+    <!-- <div class="field-grid">
       <label class="col-12 mb-2 md:col-2 md:mb-0">Fecha de inicio</label>
       <div class="col-12 field">
         <mat-form-field class="w-full">
@@ -32,7 +32,44 @@
         </mat-form-field>
         <mat-error *ngIf="finalDateControl.touched && finalDateControl.invalid">{{getErrorMessage(finalDateControl)}}</mat-error>
       </div>
+    </div> -->
+
+    <!-- <div class="field-grid">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Ingresa un rango de fechas</label>
+      <div class="col-12 filed">
+        <mat-form-field class="w-full">
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate  [formControl]="startDateControl">
+            <input matEndDate  [formControl]="finalDateControl">
+          </mat-date-range-input>
+          <mat-hint>YYYY/MM/DD - YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+    </div> -->
+
+    <div class="field-grid">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Ingresa un rango de fechas</label>
+      <div class="col-12 filed">
+        <mat-form-field class="w-full">
+          <mat-label>Fecha de inicio</mat-label>
+          <input matInput [matDatepicker]="startDatePicker" [formControl]="startDateControl" required>
+          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+          <mat-error *ngIf="startDateControl.touched && startDateControl.invalid">{{getErrorMessage(startDateControl)}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Fecha de culminación</mat-label>
+          <input matInput [matDatepicker]="finalDatePicker" [formControl]="finalDateControl" required>
+          <mat-datepicker-toggle matSuffix [for]="finalDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #finalDatePicker></mat-datepicker>
+          <mat-error *ngIf="finalDateControl.touched && finalDateControl.invalid">{{getErrorMessage(finalDateControl)}}</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="coursesForm.get('dateRange')?.hasError('invalidRange')">El rango de fechas no es válido.</mat-error>
+      </div>
     </div>
+
   </form>
 </div>
 <div class="flex justify-content-end" mat-dialog-actions>
@@ -41,4 +78,5 @@
     {{dataToEdit ? "Editar" : "Agregar"}}
   </button>
 </div>
+{{coursesForm.value | json}}
 

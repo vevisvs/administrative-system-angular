@@ -12,9 +12,9 @@ export class ModalFormComponent {
   constructor(private dialogRef: MatDialogRef<ModalFormComponent>,
      @Inject(MAT_DIALOG_DATA) public data: Course){}
 
-    titleControl = new FormControl<string | null>('', [Validators.required, Validators.minLength(4)]);
-    startDateControl = new FormControl<string | null>('', [Validators.required]);
-    finalDateControl = new FormControl<string | null>('', [Validators.required]);
+  titleControl = new FormControl<string | null>('' ,[Validators.required, Validators.minLength(4)]);
+  startDateControl = new FormControl<Date | null>(null, [Validators.required]);
+  finalDateControl = new FormControl<Date | null>(null, [Validators.required]);
 
   coursesForm = new FormGroup({
     title: this.titleControl,
@@ -27,9 +27,9 @@ export class ModalFormComponent {
   ngOnInit(): void {
     if (this.data) {
       this.dataToEdit = true;
-      this.titleControl.setValue(this.data.title);
-      this.startDateControl.setValue(this.data.startDate);
-      this.finalDateControl.setValue(this.data.finalDate)
+      this.titleControl.setValue(this.data.title || null);
+      this.startDateControl.setValue(this.data.startDate ? new Date(this.data.startDate) : null);
+      this.finalDateControl.setValue(this.data.finalDate ? new Date(this.data.finalDate) : null);
     }
   }
 
@@ -60,11 +60,17 @@ export class ModalFormComponent {
 
   submitForm(): void{
     if(this.data.id){
+     //ESTO ESTA PERFECTO (funcionalidad: editar)
       const id = {id: this.data.id}
       const dataUpdated = {...this.coursesForm.value, ...id}
       this.dialogRef.close(dataUpdated)
     } else {
+      //AQUI HAY ERROR (funcionalidad: agregar)
       this.dialogRef.close(this.coursesForm.value);
     }
   }
+
 }
+
+
+

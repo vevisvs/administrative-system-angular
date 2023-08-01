@@ -11,11 +11,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { FulldataPipe } from './pipes/fulldata.pipe';
 import { FontsizeDirective } from './directives/fontsize.directive';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DateFormatPipe } from './pipes/date-format.pipe';
+
 
 @NgModule({
   declarations: [
     FulldataPipe,
-    FontsizeDirective
+    FontsizeDirective,
+    DateFormatPipe
   ],
   imports: [
     CommonModule,
@@ -33,6 +38,10 @@ import { FontsizeDirective } from './directives/fontsize.directive';
     MatCardModule,
     FulldataPipe,
     FontsizeDirective,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    DateFormatPipe,
+
   ]
 })
 export class SharedModule { }

@@ -10,9 +10,9 @@ export class CourseService {
   constructor() { }
 
   courses: Course[] = [
-    {id: 1, title: 'JavaScript', startDate: '2023-07-24', finalDate: '2023-09-15'},
-    {id: 2, title: 'ReactJS', startDate: '2023-08-10', finalDate: '2023-10-03'},
-    {id: 3, title: 'Angular', startDate: '2023-08-23', finalDate: '2023-10-15'},
+    {id: 1, title: 'JavaScript', startDate: new Date('2023-07-24'), finalDate: new Date('2023-09-15')},
+    {id: 2, title: 'ReactJS', startDate: new Date('2023-08-10'), finalDate: new Date('2023-10-03')},
+    {id: 3, title: 'Angular', startDate: new Date('2023-08-23'), finalDate: new Date('2023-10-15')},
   ]
 
   private courses$: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>(this.courses)

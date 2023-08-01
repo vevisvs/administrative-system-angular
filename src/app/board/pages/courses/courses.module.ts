@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
     CoursesComponent,
     TableCoursesComponent,
     ModalFormComponent,
-    InfoDetailComponent
+    InfoDetailComponent,
   ],
   imports: [
     CommonModule,
