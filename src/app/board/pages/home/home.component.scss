@@ -1,10 +1,10 @@
 
 .container-home{
-  height: 100%;
-  width: 50%;
+  height: 700px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -14,8 +14,28 @@
   height: 520px;
   width: 750px;
   border-radius: 20%;
+  animation: logoAnimation 2s infinite alternate;
+}
+
+@keyframes logoAnimation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
 }
 
 img{
   width: 100%;
+}
+
+p{
+  font-size: 1.2rem;
+  width: 60%;
+  text-align: center;
+  background-color: rgb(39, 38, 38, 0.6);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
