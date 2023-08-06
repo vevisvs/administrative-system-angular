@@ -1,0 +1,42 @@
+{
+  "admins": [
+    {
+      "id": 1,
+      "name": "Vevis",
+      "lastname": "Villalobos",
+      "email": "ve@example.com",
+      "password": 123456789,
+      "token": "asdfghjkl"
+    }
+  ],
+  "courses": [
+    {
+      "title": "Java",
+      "startDate": "2023-07-24T00:00:00.000Z",
+      "finalDate": "2023-09-15T00:00:00.000Z",
+      "id": 1
+    },
+    {
+      "title": "Angular",
+      "startDate": "2023-08-23T03:00:00.000Z",
+      "finalDate": "2023-10-20T03:00:00.000Z",
+      "id": 2
+    },
+    {
+      "title": "JavaScript",
+      "startDate": "2023-09-04T03:00:00.000Z",
+      "finalDate": "2023-10-03T03:00:00.000Z",
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "id": 1691208492111,
+      "name": "Angela",
+      "lastname": "Silva",
+      "email": "angela@example.com",
+      "country": "Estados Unidos",
+      "phone": "054786159"
+    }
+  ]
+}

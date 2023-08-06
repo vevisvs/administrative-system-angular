@@ -1,76 +1,70 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Course } from '../../models/course';
 
+// interface CourseFormData {
+//  title: string | null;
+//  startDate: Date | null;
+//  finalDate: Date | null;
+// }
+
 @Component({
-  selector: 'app-modal-form',
-  templateUrl: './modal-form.component.html',
-  styleUrls: ['./modal-form.component.scss']
+ selector: 'app-modal-form',
+ templateUrl: './modal-form.component.html',
+ styleUrls: ['./modal-form.component.scss']
 })
-export class ModalFormComponent {
-  constructor(private dialogRef: MatDialogRef<ModalFormComponent>,
-     @Inject(MAT_DIALOG_DATA) public data: Course){}
 
-  titleControl = new FormControl<string | null>('' ,[Validators.required, Validators.minLength(4)]);
-  startDateControl = new FormControl<Date | null>(null, [Validators.required]);
-  finalDateControl = new FormControl<Date | null>(null, [Validators.required]);
+export class ModalFormComponent implements OnInit {
+ coursesForm: FormGroup;
+ dataToEdit: boolean = false;
 
-  coursesForm = new FormGroup({
-    title: this.titleControl,
-    startDate: this.startDateControl,
-    finalDate: this.finalDateControl
-  })
 
-  dataToEdit: Boolean = false;
+ constructor(
+  private dialogRef: MatDialogRef<ModalFormComponent>,
+  @Inject(MAT_DIALOG_DATA) public data: Course
+ ) {
+  this.coursesForm = new FormGroup({
+   title: new FormControl<string | null>('', [Validators.required, Validators.minLength(4)]),
+   startDate: new FormControl<Date | null>(null, [Validators.required]),
+   finalDate: new FormControl<Date | null>(null, [Validators.required])
+  });
+ }
 
-  ngOnInit(): void {
-    if (this.data) {
-      this.dataToEdit = true;
-      this.titleControl.setValue(this.data.title || null);
-      this.startDateControl.setValue(this.data.startDate ? new Date(this.data.startDate) : null);
-      this.finalDateControl.setValue(this.data.finalDate ? new Date(this.data.finalDate) : null);
-    }
+ ngOnInit(): void {
+  if (this.data) {
+   this.dataToEdit = true;
+   this.populateForm(this.data);
   }
+ }
 
-  getErrorMessage(formControl: FormControl): string{
-    switch (formControl) {
-      case this.titleControl:
-        if(formControl.hasError('required')){
-          return'El campo es requerido';
-        } else if(formControl.hasError('minlength')){
-          return 'El campo debe tener mínimo 4 caracteres'
-        }
-        break;
-      case this.startDateControl:
-        if(formControl.hasError('required')){
-          return 'El campo es requerido'
-        }
-        break;
-      case this.finalDateControl:
-        if(formControl.hasError('required')){
-          return 'El campo es requerido'
-        }
-        break;
-      default:
-        break;
-    }
-    return '';
+ populateForm(data: Course): void {
+  const { title, startDate, finalDate } = data;
+  this.coursesForm.setValue({ title, startDate: startDate ? new Date(startDate) : null, finalDate: finalDate ? new Date(finalDate) : null });
+ }
+
+getErrorMessage(controlName: string) {
+  const control = this.coursesForm.get(controlName);
+  if (control?.hasError('required')) {
+    return 'El campo es requerido';
   }
-
-  submitForm(): void{
-    if(this.data.id){
-     //ESTO ESTA PERFECTO (funcionalidad: editar)
-      const id = {id: this.data.id}
-      const dataUpdated = {...this.coursesForm.value, ...id}
-      this.dialogRef.close(dataUpdated)
-    } else {
-      //AQUI HAY ERROR (funcionalidad: agregar)
-      this.dialogRef.close(this.coursesForm.value);
-    }
+  if (control?.hasError('minlength')) {
+    return 'El campo debe tener mínimo 4 caracteres';
   }
-
+  return '';
 }
+
+ submitForm(): void {
+  if (this.dataToEdit) {
+   const id = { id: this.data.id };
+   const dataUpdated = { ...this.coursesForm.value, ...id };
+   this.dialogRef.close(dataUpdated);
+  } else {
+   this.dialogRef.close(this.coursesForm.value);
+  }
+ }
+}
+
 
 
 

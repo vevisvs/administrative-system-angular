@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './board/board.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'board',
+    canActivate: [authGuard],
     component: BoardComponent,
     loadChildren: () => import('./board/board.module').then(m => m.BoardModule)
   },
