@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DateFormatPipe implements PipeTransform {
 
-  transform(value: string | null) {
+  transform(value: string | null ) {
     const datePipe = new DatePipe("en-ES");
     value = datePipe.transform(value, 'yyyy-MM-dd');
     return value;

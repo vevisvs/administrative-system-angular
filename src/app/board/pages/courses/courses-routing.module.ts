@@ -14,10 +14,10 @@ import { CommonModule } from "@angular/common";
         component: CoursesComponent,
         pathMatch: 'full'
       },
-      // {
-      //   path: ':id',
-      //   component: InfoDetailComponent
-      // }
+      {
+        path: 'courses/:id',
+        component: InfoDetailComponent
+      }
     ])
   ],
   exports: [RouterModule]

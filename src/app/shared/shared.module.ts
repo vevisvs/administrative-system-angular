@@ -14,7 +14,7 @@ import { FontsizeDirective } from './directives/fontsize.directive';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DateFormatPipe } from './pipes/date-format.pipe';
-
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
     MatNativeDateModule,
     MatDatepickerModule,
     DateFormatPipe,
+    MatChipsModule
 
   ]
 })

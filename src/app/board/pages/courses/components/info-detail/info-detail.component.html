@@ -5,10 +5,10 @@
   <mat-card-header class="flex flex-column justify-content-between">
     <mat-card-title>{{courseDetail?.title}}</mat-card-title>
     <mat-card-subtitle>Categoria: programación</mat-card-subtitle>
-    <img mat-card-sm-image class="image-detail" src="https://images.unsplash.com/photo-1619410283995-43d9134e7656?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
+    <img mat-card-image class="image-detail" src="https://images.unsplash.com/photo-1487611459768-bd414656ea10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
     <mat-card-content>
-      <p>Fecha de inicio: {{courseDetail?.startDate}}</p>
-      <p>Fecha de finalización: {{courseDetail?.finalDate}}</p>
+      <mat-card-subtitle>Fecha de inicio: {{courseDetail?.startDate}}</mat-card-subtitle>
+      <mat-card-subtitle>Fecha de finalización: {{courseDetail?.finalDate}}</mat-card-subtitle>
     </mat-card-content>
   </mat-card-header>
 </mat-card>

@@ -1,6 +1,6 @@
 <div class="flex justify-content-between align-items-center">
   <button mat-raised-button color="primary" (click)="openDialog()">Agregar alumno</button>
-  <p>Cantidad de alumnos: <span>{{totalUsers}}</span></p>
+  <p>Cantidad de alumnos inscrítos: <span>{{totalUsers}}</span></p>
 </div>
 <ng-container *ngIf="alumnos$ | async as alumnos">
   <app-list-users [dataSource]="alumnos" (edit)="editUser($event)" (delete)="deleteUser($event)" ></app-list-users>

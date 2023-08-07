@@ -14,10 +14,10 @@ import { CommonModule } from "@angular/common";
         component: AdminsComponent,
         pathMatch: 'full'
       },
-      // {
-      //   path: ':id',
-      //   component: DetailAdminComponent
-      // }
+      {
+        path: 'admins/:id',
+        component: DetailAdminComponent
+      }
     ])
   ],
   exports: [RouterModule]

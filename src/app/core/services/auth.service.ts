@@ -55,7 +55,7 @@ export class AuthService {
         next: (authAdmin) => {
           if (authAdmin) {
             this._authAdmin$.next(authAdmin);
-            this.router.navigate(['/board']);
+            this.router.navigate(['/board', 'home']);
             localStorage.setItem('token', authAdmin.token);
           } else {
             this._authAdmin$.next(null);
