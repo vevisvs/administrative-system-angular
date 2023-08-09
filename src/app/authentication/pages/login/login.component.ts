@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { loginRequest } from '../../models/login';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +11,7 @@ export class LoginComponent {
 
   sesionForm: FormGroup;
 
-  constructor(private authService: AuthService, private route: Router, private fb:FormBuilder){
+  constructor(private authService: AuthService, private fb:FormBuilder){
     this.sesionForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
