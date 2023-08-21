@@ -13,11 +13,7 @@ export class CourseService {
     this.loadingCourses();
    }
 
-  courses: Course[] = [
-    // {id: 1, title: 'JavaScript', startDate: new Date('2023-07-24'), finalDate: new Date('2023-09-15')},
-    // {id: 2, title: 'ReactJS', startDate: new Date('2023-08-10'), finalDate: new Date('2023-10-03')},
-    // {id: 3, title: 'Angular', startDate: new Date('2023-08-23'), finalDate: new Date('2023-10-15')},
-  ]
+  courses: Course[] = []
 
   private urlCourses = "http://localhost:3000/courses"
   private courses$: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>(this.courses)
@@ -39,7 +35,6 @@ export class CourseService {
   }
 
   add(newCourse: Course): void{
-    // this.courses$.next([...this.courses, {...newCourse, id: this.courses.length + 1}])
     this.http.post<Course>(this.urlCourses, newCourse).pipe(
       mergeMap(courseToCreated => {
         return this.courses$.pipe(
