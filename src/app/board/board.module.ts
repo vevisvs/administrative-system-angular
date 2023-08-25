@@ -9,6 +9,7 @@ import { AdminsModule } from './pages/admins/admins.module';
 import { CoursesModule } from './pages/courses/courses.module';
 import { BoardRoutingModule } from './board-routing.module';
 import { RouterModule } from '@angular/router';
+import { InscriptionsModule } from './pages/inscriptions/inscriptions.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { RouterModule } from '@angular/router';
     HomeModule,
     AdminsModule,
     CoursesModule,
+    InscriptionsModule,
     BoardRoutingModule,
     RouterModule
   ],
