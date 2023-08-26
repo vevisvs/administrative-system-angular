@@ -37,7 +37,8 @@ export class AdminsComponent implements OnInit{
         name: result.name,
         lastname: result.lastname,
         email: result.email,
-        password: result.password
+        password: result.password,
+        role: "Administrador"
       })
     });
   }

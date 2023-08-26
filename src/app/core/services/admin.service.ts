@@ -40,7 +40,7 @@ export class AdminService {
 
   addAdmin(userAdmin: Admin): void{
     const token = createToken(25)
-    this.httpClient.post<Admin>(this.urlAdmins, {...userAdmin, token}).pipe(
+    this.httpClient.post<Admin>(this.urlAdmins, {...userAdmin, token, role: "Administrador"}).pipe(
       tap(newData => {
         const dataUpdated = [...this.administrators$.getValue(), newData];
         this.administrators$.next(dataUpdated)

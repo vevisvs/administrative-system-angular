@@ -33,8 +33,9 @@ export class DialogComponent {
         ...this.adminForm.value
       }
       const userId = this.data.id
+      const roleAdmin = this.data.role
       dataWithToken['token'] = this.data.token
-      this.dialogRef.close({...this.adminForm.value, id: userId});
+      this.dialogRef.close({...this.adminForm.value, id: userId, role: roleAdmin});
     } else{
       this.dialogRef.close(this.adminForm.value)
     }

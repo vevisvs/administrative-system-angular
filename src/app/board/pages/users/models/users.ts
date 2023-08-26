@@ -5,5 +5,6 @@ export interface Users{
   email: string,
   country: string,
   phone: string,
-  token?: string
+  token?: string,
+  role: string
 }

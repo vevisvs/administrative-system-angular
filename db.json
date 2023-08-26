@@ -1,20 +1,22 @@
 {
   "admins": [
     {
-      "name": "Valentina",
-      "lastname": "Ferrez",
-      "email": "vale@example.com",
-      "password": "123ASDFG",
-      "id": 1693003223501,
-      "token": "PiHe6zJExppHKRGd07Q1MOhMq"
+      "name": "Gonzalo",
+      "lastname": "Ramirez",
+      "email": "gonzy@example.com",
+      "password": "go0123456",
+      "id": 1693078332150,
+      "role": "Administrador",
+      "token": "wP9bWQr6Oy83YRd7TOQkM8Iw8"
     },
     {
+      "id": 1693078440335,
       "name": "Vevis",
       "lastname": "Villalobos",
       "email": "ve@example.com",
       "password": "123456789",
-      "id": 1693003293504,
-      "token": "4sV7dY9RBVwWY8yRAFkivyK1w"
+      "role": "Administrador",
+      "token": "3PKWyrGxypShLPvTo1Y8Sv6jl"
     }
   ],
   "courses": [
@@ -45,31 +47,54 @@
   ],
   "users": [
     {
-      "id": 1693075796907,
+      "id": 1693078794076,
+      "name": "Susana",
+      "lastname": "Gimenez",
+      "email": "susana@example.com",
+      "country": "Chile",
+      "phone": "090633214",
+      "token": "XBylBlfRh6MqIvyxEHudWWFix",
+      "role": "Usuario"
+    },
+    {
+      "id": 1693078957956,
       "name": "Mia",
-      "lastname": "Pereira",
-      "email": "miap@example.com",
+      "lastname": "Ferrez",
+      "email": "mf@example.com",
       "country": "Uruguay",
-      "phone": "097654158",
-      "token": "jzOIlbsefSQigNTES4EN2q087"
+      "phone": "098159366",
+      "token": "ZJao1YRayjH2cjHag66T5GARo",
+      "role": "Usuario"
     },
     {
-      "id": 1693076023842,
-      "name": "Angela",
-      "lastname": "Spelorzi",
-      "email": "asp@example.com",
+      "id": 1693078992046,
+      "name": "Christian",
+      "lastname": "Paz",
+      "email": "chris@example.com",
+      "country": "Uruguay",
+      "phone": "094551223",
+      "token": "Q8fj2WngNqEmuWf9PlCytIugB",
+      "role": "Usuario"
+    },
+    {
+      "id": 1693079053080,
+      "name": "Silvestre",
+      "lastname": "Novaro",
+      "email": "silver@example.com",
       "country": "Argentina",
-      "phone": "093742557",
-      "token": "pRT5N0niymFgmWmFENkzJxiys"
+      "phone": "093446777",
+      "token": "Ivl2tG7gvYa0mfSqZoZhDnotQ",
+      "role": "Usuario"
     },
     {
-      "id": 1693076338188,
-      "name": "Gabriel",
-      "lastname": "Dos Santos",
-      "email": "gabo@example.com",
-      "country": "Uruguay",
-      "phone": "092753144",
-      "token": "mx0vJQWLVsqIt4jrbL0Xb3EX9"
+      "id": 1693079089437,
+      "name": "Sofia",
+      "lastname": "Diaz",
+      "email": "sofi@example.com",
+      "country": "Argentina",
+      "phone": "091888598",
+      "token": "6rJ84oyL8fIuCaWjIKqIiKcaL",
+      "role": "Usuario"
     }
   ]
 }

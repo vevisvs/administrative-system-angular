@@ -80,7 +80,7 @@ export class ModalUsersComponent {
 
   agregar(): void{
     if(this.data.token){
-      this.dialogRef.close({...this.formUser.value, token: this.data.token})
+      this.dialogRef.close({...this.formUser.value, token: this.data.token, role: this.data.role})
     }
   }
 

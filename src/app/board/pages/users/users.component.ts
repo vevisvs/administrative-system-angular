@@ -52,7 +52,7 @@ export class UsersComponent {
       phone: '',
       token: token
     };
-    this.dialog.open(ModalUsersComponent, { data: newUser }).afterClosed().subscribe({
+    this.dialog.open(ModalUsersComponent, { data: {...newUser, role: "Usuario"}}).afterClosed().subscribe({
       next: (result) => {
         if (result) {
           this.userService.addUser(result);
