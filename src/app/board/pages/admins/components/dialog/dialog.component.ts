@@ -29,7 +29,11 @@ export class DialogComponent {
 
   save(): void{
     if(this.data.id){
+      const dataWithToken = {
+        ...this.adminForm.value
+      }
       const userId = this.data.id
+      dataWithToken['token'] = this.data.token
       this.dialogRef.close({...this.adminForm.value, id: userId});
     } else{
       this.dialogRef.close(this.adminForm.value)

@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, map, tap, mergeMap, take} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { createToken } from '../helpers/token-helper';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,8 @@ export class AdminService {
   }
 
   addAdmin(userAdmin: Admin): void{
-    this.httpClient.post<Admin>(this.urlAdmins, userAdmin).pipe(
+    const token = createToken(25)
+    this.httpClient.post<Admin>(this.urlAdmins, {...userAdmin, token}).pipe(
       tap(newData => {
         const dataUpdated = [...this.administrators$.getValue(), newData];
         this.administrators$.next(dataUpdated)

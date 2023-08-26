@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Users } from 'src/app/board/pages/users/models/users';
 import { BehaviorSubject, map, tap, mergeMap, take, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { createToken } from '../helpers/token-helper';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,11 @@ export class UserService {
   private users$: BehaviorSubject<Users[]> = new BehaviorSubject<Users[]>(this.users);
 
   loadData(): void {
-    this.httpClient.get<Users[]>(this.urlUsers).pipe(
+    this.httpClient.get<Users[]>(this.urlUsers, {
+      headers: new HttpHeaders({
+        'token': '1554456jhkjlk'
+      }),
+    }).pipe(
       tap(u => this.users$.next(u)),
       catchError(error => {
         console.log("error al cargar los datos de los usuarios", error)
@@ -47,7 +52,8 @@ export class UserService {
   }
 
   addUser(user: Users): void {
-    this.httpClient.post<Users>(this.urlUsers, user).pipe(
+    const token = createToken(25)
+    this.httpClient.post<Users>(this.urlUsers, {...user, token}).pipe(
       tap(createdData => {
         const newData = [...this.users$.getValue(), createdData]
         this.users$.next(newData)

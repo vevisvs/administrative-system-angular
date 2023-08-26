@@ -47,15 +47,14 @@ export class AdminsComponent implements OnInit{
   }
 
   edit(admin: Admin): void{
-    console.log("usuario a modificar:", admin)
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {...admin}
     });
     dialogRef.afterClosed().subscribe({
       next: (adminModificated) => {
         if(adminModificated){
+          adminModificated.token = admin.token;
           this.adminService.editAdmin(adminModificated)
-          console.log("user modificado:", adminModificated)
         }
       }
     })

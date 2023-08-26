@@ -4,6 +4,7 @@ import { ModalUsersComponent } from './components/modal-users/modal-users.compon
 import { Users } from './models/users';
 import { UserService } from 'src/app/core/services/user.service';
 import { Observable } from 'rxjs';
+import { createToken } from 'src/app/core/helpers/token-helper';
 
 @Component({
   selector: 'app-users',
@@ -20,23 +21,43 @@ export class UsersComponent {
       this.usersCount();
   };
 
+  // openDialog(): void {
+  //   this.dialog.open(ModalUsersComponent).afterClosed().subscribe({
+  //     next: (result) => {
+  //       if(result){
+  //         this.userService.addUser(
+  //           {
+  //             id: Date.now() + Math.floor(Math.random() * 1000),
+  //             name: result.name,
+  //             lastname: result.lastname,
+  //             email: result.email,
+  //             country: result.country,
+  //             phone: result.phone
+  //           }
+  //         );
+  //       } else{
+  //         console.log("No se recibió ninguna información")
+  //       }
+  //     }
+  //   });
+  // }
   openDialog(): void {
-    this.dialog.open(ModalUsersComponent).afterClosed().subscribe({
+    const token = createToken(25);
+    const newUser = {
+      id: Date.now() + Math.floor(Math.random() * 1000),
+      name: '',
+      lastname: '',
+      email: '',
+      country: '',
+      phone: '',
+      token: token
+    };
+    this.dialog.open(ModalUsersComponent, { data: newUser }).afterClosed().subscribe({
       next: (result) => {
-        if(result){
-          console.log(result)
-          this.userService.addUser(
-            {
-              id: Date.now() + Math.floor(Math.random() * 1000),
-              name: result.name,
-              lastname: result.lastname,
-              email: result.email,
-              country: result.country,
-              phone: result.phone
-            }
-          );
-        } else{
-          console.log("No se recibió ninguna información")
+        if (result) {
+          this.userService.addUser(result);
+        } else {
+          console.log("No se recibió ninguna información");
         }
       }
     });
@@ -46,8 +67,8 @@ export class UsersComponent {
     const dialogRef = this.dialog.open(ModalUsersComponent, { data: userToModify });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        result.token = userToModify.token;
         this.userService.onEdit(result)
-        console.log("user edited:", result)
       };
     });
   }

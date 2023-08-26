@@ -25,7 +25,9 @@ export class ModalUsersComponent {
       this.populateForm();
       this.applyValidations();
     }
+    console.log("data:", this.data)
   }
+
 
   createForm(): FormGroup {
     return this.fb.group({
@@ -45,7 +47,8 @@ export class ModalUsersComponent {
       lastname: this.data.lastname,
       email: this.data.email,
       country: this.data.country,
-      phone: this.data.phone
+      phone: this.data.phone,
+      token: this.data.token
     });
   }
 
@@ -63,8 +66,22 @@ export class ModalUsersComponent {
     this.dialogRef.close();
   }
 
+  // agregar(): void{
+  //   this.dialogRef.close(this.formUser.value);
+  // }
+
+  // agregar(): void {
+  //   const dataWithToken = {
+  //     ...this.formUser.value,
+  //     token: this.data.token
+  //   };
+  //   this.dialogRef.close(dataWithToken);
+  // }
+
   agregar(): void{
-    this.dialogRef.close(this.formUser.value);
+    if(this.data.token){
+      this.dialogRef.close({...this.formUser.value, token: this.data.token})
+    }
   }
 
   public getError(inputName: string): string {

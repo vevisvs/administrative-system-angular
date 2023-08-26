@@ -1,12 +1,20 @@
 {
   "admins": [
     {
-      "id": 1,
+      "name": "Valentina",
+      "lastname": "Ferrez",
+      "email": "vale@example.com",
+      "password": "123ASDFG",
+      "id": 1693003223501,
+      "token": "PiHe6zJExppHKRGd07Q1MOhMq"
+    },
+    {
       "name": "Vevis",
       "lastname": "Villalobos",
       "email": "ve@example.com",
-      "password": 123456789,
-      "token": "asdfghjkl"
+      "password": "123456789",
+      "id": 1693003293504,
+      "token": "4sV7dY9RBVwWY8yRAFkivyK1w"
     }
   ],
   "courses": [
@@ -24,19 +32,44 @@
     },
     {
       "title": "JavaScript",
+      "startDate": "2023-09-01T03:00:00.000Z",
+      "finalDate": "2023-10-27T03:00:00.000Z",
+      "id": 3
+    },
+    {
+      "title": "MySQL",
       "startDate": "2023-09-04T03:00:00.000Z",
       "finalDate": "2023-10-03T03:00:00.000Z",
-      "id": 3
+      "id": 4
     }
   ],
   "users": [
     {
-      "id": 1691208492111,
+      "id": 1693075796907,
+      "name": "Mia",
+      "lastname": "Pereira",
+      "email": "miap@example.com",
+      "country": "Uruguay",
+      "phone": "097654158",
+      "token": "jzOIlbsefSQigNTES4EN2q087"
+    },
+    {
+      "id": 1693076023842,
       "name": "Angela",
-      "lastname": "Silva",
-      "email": "angela@example.com",
+      "lastname": "Spelorzi",
+      "email": "asp@example.com",
       "country": "Argentina",
-      "phone": "054786159"
+      "phone": "093742557",
+      "token": "pRT5N0niymFgmWmFENkzJxiys"
+    },
+    {
+      "id": 1693076338188,
+      "name": "Gabriel",
+      "lastname": "Dos Santos",
+      "email": "gabo@example.com",
+      "country": "Uruguay",
+      "phone": "092753144",
+      "token": "mx0vJQWLVsqIt4jrbL0Xb3EX9"
     }
   ]
 }

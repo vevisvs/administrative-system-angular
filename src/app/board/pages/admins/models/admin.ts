@@ -4,6 +4,7 @@ export interface Admin {
   lastname: string,
   email: string,
   password: string,
+  token?: string
 }
 
 export interface DialogData {
@@ -18,7 +19,8 @@ export interface DataEdit{
   name: string,
   lastname: string,
   email: string,
-  password: string
+  password: string,
+  token: string
 }
 
 export interface AdminLogin{
