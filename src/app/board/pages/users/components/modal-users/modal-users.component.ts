@@ -25,7 +25,6 @@ export class ModalUsersComponent {
       this.populateForm();
       this.applyValidations();
     }
-    console.log("data:", this.data)
   }
 
 
@@ -35,6 +34,7 @@ export class ModalUsersComponent {
       name: ['', [Validators.required, Validators.minLength(3)]],
       lastname: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(7)]],
       country: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
     });
@@ -46,6 +46,7 @@ export class ModalUsersComponent {
       name: this.data.name,
       lastname: this.data.lastname,
       email: this.data.email,
+      password: this.data.password,
       country: this.data.country,
       phone: this.data.phone,
       token: this.data.token
@@ -56,27 +57,15 @@ export class ModalUsersComponent {
     this.formUser.get('name')?.setValidators([Validators.required, Validators.minLength(3)]);
     this.formUser.get('lastname')?.setValidators([Validators.required, Validators.minLength(2)]);
     this.formUser.get('email')?.setValidators([Validators.required, Validators.email]);
+    this.formUser.get('password')?.setValidators([Validators.required, Validators.minLength(7)]);
     this.formUser.get('country')?.setValidators([Validators.required]);
     this.formUser.get('phone')?.setValidators([Validators.required, Validators.pattern('^[0-9]+$')]);
-
     this.formUser.updateValueAndValidity();
   }
 
   cancelar(): void {
     this.dialogRef.close();
   }
-
-  // agregar(): void{
-  //   this.dialogRef.close(this.formUser.value);
-  // }
-
-  // agregar(): void {
-  //   const dataWithToken = {
-  //     ...this.formUser.value,
-  //     token: this.data.token
-  //   };
-  //   this.dialogRef.close(dataWithToken);
-  // }
 
   agregar(): void{
     if(this.data.token){
@@ -95,7 +84,9 @@ export class ModalUsersComponent {
         error = 'Este campo debe tener como mínimo 3 caracteres';
       } else if (errorObj['minlength'] && inputName === 'lastname') {
         error = 'Este campo debe tener como mínimo 2 caracteres';
-      } else if(errorObj['email']) {
+      } else if (errorObj['minlength'] && inputName === 'password') {
+        error = 'Este campo debe tener como mínimo 7 caracteres';
+      }else if(errorObj['email']) {
         error = 'El email debe tener un formato válido';
       } else if(errorObj['pattern']){
         error = 'Debe ingresar un numero de teléfono válido'

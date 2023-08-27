@@ -48,6 +48,7 @@ export class UsersComponent {
       name: '',
       lastname: '',
       email: '',
+      password: '',
       country: '',
       phone: '',
       token: token
@@ -65,6 +66,7 @@ export class UsersComponent {
 
   editUser(userToModify: Users): void {
     const dialogRef = this.dialog.open(ModalUsersComponent, { data: userToModify });
+    console.log("user to modify:", userToModify)
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         result.token = userToModify.token;

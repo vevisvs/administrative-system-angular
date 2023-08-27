@@ -3,6 +3,7 @@ export interface Users{
   name: string,
   lastname: string,
   email: string,
+  password: string,
   country: string,
   phone: string,
   token?: string,

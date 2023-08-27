@@ -36,6 +36,17 @@
 
       <div class="flex flex-column justify-content-center">
         <mat-form-field class="field col">
+          <mat-label>Contraseña</mat-label>
+          <input matInput
+                  class="text-base text-color surface-overlay p-2 appearance-none outline-none focus:border-primary w-full"
+                  formControlName="password"
+                 >
+        </mat-form-field>
+        <p>{{ getError('password')}}</p>
+      </div>
+
+      <div class="flex flex-column justify-content-center">
+        <mat-form-field class="field col">
           <mat-label>País</mat-label>
           <input matInput
                   class="text-base text-color surface-overlay p-2 appearance-none outline-none focus:border-primary w-full"
