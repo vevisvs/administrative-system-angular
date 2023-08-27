@@ -7,12 +7,27 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   const router = inject(Router);
   const as = inject(AuthService);
+  const userType = as.getUserType();
 
-  return as.isAuth().pipe(
+  return as.isAuth(userType).pipe(
     map((isAuth) => {
+      console.log("auth:", isAuth)
       if (isAuth) return true;
       return router.createUrlTree(['/authentication/login']);
     })
   );
 };
+
+// export const authGuard: CanActivateFn = (route, state) => {
+//   const router = inject(Router);
+//   const as = inject(AuthService);
+//   const userType = as.getUserType();
+
+//   return as.isAuth(userType).pipe(
+//     map((isAuth) => {
+//       return isAuth;
+//     })
+//   );
+// };
+
 

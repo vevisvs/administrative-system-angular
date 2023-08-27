@@ -14,7 +14,8 @@ export class LoginComponent {
   constructor(private authService: AuthService, private fb:FormBuilder){
     this.sesionForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      userType: ['', Validators.required]
     })
   }
 
@@ -54,12 +55,26 @@ export class LoginComponent {
     return this.password?.errors;
   }
 
-  goIn(): void{
-    if (this.sesionForm.invalid) {
+
+  // goIn(): void{
+  //   if (this.sesionForm.invalid) {
+  //     this.sesionForm.markAllAsTouched();
+  //   } else {
+  //     this.authService.loginAdmin(this.sesionForm.getRawValue())
+  //     this.sesionForm.reset();
+  //   }
+  // }
+  login() {
+    if(this.sesionForm.valid){
+        const payload = {
+        email: this.sesionForm.value.email,
+        password: this.sesionForm.value.password,
+      };
+      this.authService.loginAdmin(payload, this.sesionForm.value.userType);
+      console.log("login:", payload, this.sesionForm.value.userType)
+    } else{
       this.sesionForm.markAllAsTouched();
-    } else {
-      this.authService.loginAdmin(this.sesionForm.getRawValue())
-      this.sesionForm.reset();
+      console.log("Hubo un error al intentar iniciar sesión")
     }
   }
 }
