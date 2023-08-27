@@ -8,6 +8,12 @@ import { throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { loginRequest } from 'src/app/authentication/models/login';
 
+
+interface dataUserLogged{
+  name: string ,
+  lastname: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +22,7 @@ export class AuthService {
   private _authAdmin$ = new BehaviorSubject<AdminLogin | null>(null);
   public authAdmin$ = this._authAdmin$.asObservable();
   private apiUrl = 'http://localhost:3000/admins';
+  private _userLoggedName: string | undefined;
 
   constructor(
     private http: HttpClient,
@@ -57,6 +64,7 @@ export class AuthService {
             this._authAdmin$.next(authAdmin);
             this.router.navigate(['/board', 'home']);
             localStorage.setItem('token', authAdmin.token);
+            localStorage.setItem('user', JSON.stringify(authAdmin));
           } else {
             this._authAdmin$.next(null);
           }
@@ -73,6 +81,15 @@ export class AuthService {
         error.status,
         error.error
       );
+    }
+  }
+
+
+  getUserDataFromLocalStorage(): void {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+      this._authAdmin$.next(user);
     }
   }
 

@@ -8,6 +8,11 @@
   height: 100%;
 }
 
+.toolbar{
+  display: flex;
+  justify-content: space-between;
+}
+
 .example-sidenav {
   padding: 20px;
 }

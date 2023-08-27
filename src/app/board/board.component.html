@@ -15,11 +15,17 @@
   <!--CONTENIDO-->
   <div class="example-sidenav-content">
     <!--BARRA DE NAVEGACION-->
-    <mat-toolbar color="primary">
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-      </button>
-      <span appFontsize>TECH INSTITUTE</span>
+    <mat-toolbar color="primary" class="toolbar">
+      <div class="justify-content-start">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+        </button>
+        <span appFontsize>TECH INSTITUTE</span>
+      </div>
+      <div class="justify-content-end">
+         Hola, {{ userLoggedName }}
+      </div>
+
     </mat-toolbar>
 
     <!--PAGINAS-->
