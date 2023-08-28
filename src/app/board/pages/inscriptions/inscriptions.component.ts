@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { InscriptionsActions } from './store/inscriptions.actions';
+import { Inscription } from './models/inscription';
+import { Observable } from 'rxjs';
+import { inscriptionsData } from './store/inscriptions.selectors';
 
 @Component({
   selector: 'app-inscriptions',
@@ -7,4 +12,12 @@ import { Component } from '@angular/core';
 })
 export class InscriptionsComponent {
 
+  inscriptions$: Observable<Inscription[]>
+
+  constructor(private store: Store){
+    this.store.dispatch(InscriptionsActions.loadInscriptions()),
+    this.inscriptions$ = this.store.select(inscriptionsData);
+  }
+
+  displayedColumns= ['id', 'user', 'course']
 }
