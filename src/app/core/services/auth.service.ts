@@ -79,13 +79,6 @@ export class AuthService {
     }
   }
 
-  getUserDataFromLocalStorage(): void {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      const user = JSON.parse(userData);
-      this._authAdmin$.next(user);
-    }
-  }
 
   setUserType(userType: string): void {
     localStorage.setItem('userType', userType);

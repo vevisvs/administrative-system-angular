@@ -55,15 +55,6 @@ export class LoginComponent {
     return this.password?.errors;
   }
 
-
-  // goIn(): void{
-  //   if (this.sesionForm.invalid) {
-  //     this.sesionForm.markAllAsTouched();
-  //   } else {
-  //     this.authService.loginAdmin(this.sesionForm.getRawValue())
-  //     this.sesionForm.reset();
-  //   }
-  // }
   login() {
     if(this.sesionForm.valid){
         const payload = {
@@ -71,10 +62,8 @@ export class LoginComponent {
         password: this.sesionForm.value.password,
       };
       this.authService.loginAdmin(payload, this.sesionForm.value.userType);
-      console.log("login:", payload, this.sesionForm.value.userType)
     } else{
       this.sesionForm.markAllAsTouched();
-      console.log("Hubo un error al intentar iniciar sesión")
     }
   }
 }

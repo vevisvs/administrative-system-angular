@@ -18,16 +18,5 @@ export const authGuard: CanActivateFn = (route, state) => {
   );
 };
 
-// export const authGuard: CanActivateFn = (route, state) => {
-//   const router = inject(Router);
-//   const as = inject(AuthService);
-//   const userType = as.getUserType();
-
-//   return as.isAuth(userType).pipe(
-//     map((isAuth) => {
-//       return isAuth;
-//     })
-//   );
-// };
 
 
