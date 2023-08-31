@@ -39,6 +39,13 @@ export const reducer = createReducer(
       error: action.error
     }
   }),
+  on(InscriptionsActions.deleteInscriptionSuccess, (state, action) => {
+    const newData = state.data.filter(inscription => inscription.id !== action.id);
+    return {
+      ...state,
+      data: newData
+    };
+  }),
   on(InscriptionsActions.loadUser, (state) => state),
   on(InscriptionsActions.loadUserSuccess, (state, action) => {
     return {

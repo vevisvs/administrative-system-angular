@@ -35,6 +35,18 @@ export class InscriptionsEffects {
     );
   }, { dispatch: false });
 
+  deleteInscription$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(InscriptionsActions.deleteInscription),
+      concatMap(action =>
+        this.deleteInscription(action.id).pipe(
+          map(() => InscriptionsActions.deleteInscriptionSuccess({ id: action.id })),
+          catchError(error => of(InscriptionsActions.deleteInscriptionFailure({ error })))
+        )
+      )
+    );
+  });
+
 
   loadInscriptionss$ = createEffect(() => {
     return this.actions$.pipe(
@@ -71,6 +83,10 @@ export class InscriptionsEffects {
 
   private createInscription(data: CreateInscription): Observable<Inscription> {
     return this.http.post<Inscription>('http://localhost:3000/inscriptions', data)
+  }
+
+  private deleteInscription(id: number): Observable<Inscription> {
+    return this.http.delete<Inscription>(`http://localhost:3000/inscriptions/${id}`);
   }
 
   private getInscriptions(): Observable<InscriptionComplete[]>{

@@ -43,6 +43,12 @@
       "startDate": "2023-09-04T03:00:00.000Z",
       "finalDate": "2023-10-03T03:00:00.000Z",
       "id": 4
+    },
+    {
+      "title": "Diseño UX-UI",
+      "startDate": "2023-09-11T03:00:00.000Z",
+      "finalDate": "2023-10-20T03:00:00.000Z",
+      "id": 5
     }
   ],
   "users": [
@@ -67,13 +73,72 @@
       "phone": "093557442",
       "token": "ClxbK6J2wqjpPVSGQgkdLDYHj",
       "role": "Usuario"
+    },
+    {
+      "id": 1693516570330,
+      "name": "Margarita",
+      "lastname": "Paz",
+      "email": "marga@example.com",
+      "password": "marpaz1234",
+      "country": "Chile",
+      "phone": "091663332",
+      "token": "VgOLqPPLjhUGyMF42QhDN9FBA",
+      "role": "Usuario"
+    },
+    {
+      "id": 1693516627181,
+      "name": "Facundo",
+      "lastname": "Villa",
+      "email": "facu@example.com",
+      "password": "facuv5678",
+      "country": "Argentina",
+      "phone": "093777558",
+      "token": "wcZHdHSofh3JeFVDZr12LmBw2",
+      "role": "Usuario"
+    },
+    {
+      "id": 1693516813753,
+      "name": "Jose",
+      "lastname": "Gonzalez",
+      "email": "jg@example.com",
+      "password": "josegon2222",
+      "country": "Colombia",
+      "phone": "097888226",
+      "token": "3cUQpUfglozWMzQ33EQhBbplr",
+      "role": "Usuario"
+    },
+    {
+      "id": 1693517075947,
+      "name": "Christian",
+      "lastname": "Paz",
+      "email": "ch@example.com",
+      "password": "chris000",
+      "country": "Uruguay",
+      "phone": "099825499",
+      "token": "F5WNu7KaoUysBjlA9I64Kz3TJ",
+      "role": "Usuario"
     }
   ],
   "inscriptions": [
     {
-      "userId": 1,
-      "courseId": 2,
+      "userId": 1693098798928,
+      "courseId": 4,
       "id": 1
+    },
+    {
+      "userId": 1693447641271,
+      "courseId": 3,
+      "id": 2
+    },
+    {
+      "userId": 1693517075947,
+      "courseId": 5,
+      "id": 3
+    },
+    {
+      "userId": 1693516627181,
+      "courseId": 1,
+      "id": 4
     }
   ]
 }

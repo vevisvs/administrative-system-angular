@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Inscription, InscriptionComplete } from '../../models/inscription';
+import { Inscription } from '../../models/inscription';
 import { Users } from '../../../users/models/users';
 import { Course } from '../../../courses/models/course';
 import { Observable } from 'rxjs';
@@ -25,7 +25,7 @@ export class ModalDialogComponent{
       this.inscriptionForm = this.formBuilder.group({
         userId: ['', [Validators.required]],
         courseId: ['', [Validators.required]],
-        dateOfInscription: ['', [Validators.required]]
+        // dateOfInscription: ['', [Validators.required]]
       }),
       this.users$ = this.store.select(selectUsers);
       this.courses$ = this.store.select(selectCourses);
@@ -39,6 +39,7 @@ export class ModalDialogComponent{
     } else {
       this.store.dispatch(InscriptionsActions.createInscription({payload: this.inscriptionForm.getRawValue()}));
       this.dialogRef.close()
+      // console.log(this.inscriptionForm.getRawValue());
     }
 
   }
