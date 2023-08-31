@@ -1,0 +1,11 @@
+.mat-form-field-ctn{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mat-form-field-ctn mat-form-field,
+.mat-form-field-ctn div {
+  width: 100%;
+  padding-left: 1rem;
+}

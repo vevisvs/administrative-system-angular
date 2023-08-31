@@ -15,7 +15,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatDatepickerModule,
     DateFormatPipe,
     MatChipsModule,
-    MatSelectModule
+    MatSelectModule,
 
   ]
 })

@@ -1,23 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { InscriptionsActions } from './store/inscriptions.actions';
-import { Inscription } from './models/inscription';
+import { InscriptionComplete } from './models/inscription';
 import { Observable } from 'rxjs';
-import { inscriptionsData } from './store/inscriptions.selectors';
+import { selectInscriptions } from './store/inscriptions.selectors';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
+import { InscriptionsActions } from './store/inscriptions.actions';
+
 
 @Component({
   selector: 'app-inscriptions',
   templateUrl: './inscriptions.component.html',
   styleUrls: ['./inscriptions.component.scss']
 })
-export class InscriptionsComponent {
+export class InscriptionsComponent implements OnInit{
 
-  inscriptions$: Observable<Inscription[]>
+  inscriptions$: Observable<InscriptionComplete[]>
 
-  constructor(private store: Store){
-    this.store.dispatch(InscriptionsActions.loadInscriptions()),
-    this.inscriptions$ = this.store.select(inscriptionsData);
+  constructor(private store: Store,  public matDialog: MatDialog){
+    this.inscriptions$ = this.store.select(selectInscriptions)
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch(InscriptionsActions.loadInscriptions())
   }
 
   displayedColumns= ['id', 'user', 'course']
+
+  addInscription(): void{
+    this.matDialog.open(ModalDialogComponent)
+  }
+
 }

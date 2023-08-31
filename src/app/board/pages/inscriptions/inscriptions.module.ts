@@ -8,15 +8,21 @@ import { InscriptionsEffects } from './store/inscriptions.effects';
 import { StoreModule } from '@ngrx/store';
 import { inscriptionsFeature } from './store/inscriptions.reducer';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
+// import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    InscriptionsComponent
+    InscriptionsComponent,
+    ModalDialogComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     InscriptionsRoutingModule,
     StoreModule.forFeature(inscriptionsFeature),
     EffectsModule.forFeature([InscriptionsEffects])

@@ -5,4 +5,6 @@ export const selectInscriptionsState = createFeatureSelector<fromInscriptions.St
   fromInscriptions.inscriptionsFeatureKey
 );
 
-export const inscriptionsData = createSelector(selectInscriptionsState, (state) => state.inscription)
+export const selectInscriptions = createSelector(selectInscriptionsState, (state) => state.data)
+export const selectUsers = createSelector(selectInscriptionsState, (state) => state.user)
+export const selectCourses = createSelector(selectInscriptionsState, (state) => state.course)

@@ -56,6 +56,24 @@
       "phone": "099632785",
       "token": "cY5r3D7DKmafYK6bUQ5LxiSom",
       "role": "Usuario"
+    },
+    {
+      "id": 1693447641271,
+      "name": "Mariela",
+      "lastname": "Castro",
+      "email": "marie@example.com",
+      "password": "mariecastro1",
+      "country": "Venezuela",
+      "phone": "093557442",
+      "token": "ClxbK6J2wqjpPVSGQgkdLDYHj",
+      "role": "Usuario"
+    }
+  ],
+  "inscriptions": [
+    {
+      "userId": 1,
+      "courseId": 2,
+      "id": 1
     }
   ]
 }

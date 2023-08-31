@@ -1,5 +1,5 @@
 
-<button mat-raised-button color="primary" class="btn-inscription">Realizar una inscripción</button>
+<button mat-raised-button color="primary" class="btn-inscription" (click)="addInscription()">Realizar una inscripción</button>
 <h2>Listado de inscripciones realizadas</h2>
 <table mat-table [dataSource]="(inscriptions$ | async) || [] ">
   <ng-container matColumnDef="id">
@@ -9,13 +9,13 @@
 
   <ng-container matColumnDef="user">
     <th mat-header-cell *matHeaderCellDef appFontsize> Nombre del alumno </th>
-    <td mat-cell *matCellDef="let inscription"> {{inscription.alumno}} </td>
+    <td mat-cell *matCellDef="let inscription"> {{inscription?.user?.name}} {{inscription?.user?.lastname}} </td>
   </ng-container>
 
 
   <ng-container matColumnDef="course">
     <th mat-header-cell *matHeaderCellDef appFontsize>Nombre del curso</th>
-    <td mat-cell *matCellDef="let inscription"> {{inscription.curso}} </td>
+    <td mat-cell *matCellDef="let inscription"> {{inscription?.course?.title}} </td>
   </ng-container>
 
   <!-- <ng-container matColumnDef="options">

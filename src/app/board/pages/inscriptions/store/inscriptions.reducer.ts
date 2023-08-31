@@ -1,28 +1,58 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { InscriptionsActions } from './inscriptions.actions';
+import { InscriptionComplete } from '../models/inscription';
 import { Users } from '../../users/models/users';
 import { Course } from '../../courses/models/course';
-import { Inscription } from '../models/inscription';
-import { DATA_MOCK } from '../../inscriptions/mocks/index'
 
 export const inscriptionsFeatureKey = 'inscriptions';
 
 export interface State {
-  inscription: Inscription[]
+  data: InscriptionComplete[];
+  user: Users[];
+  course: Course[];
+  error: unknown;
 }
 
 export const initialState: State = {
-  inscription: []
+  data: [],
+  user: [],
+  course: [],
+  error: null,
 };
 
 export const reducer = createReducer(
   initialState,
   on(InscriptionsActions.loadInscriptions, state => {
     return {
-      inscription: DATA_MOCK
+      ...state
     }
   }),
-
+  on(InscriptionsActions.loadInscriptionsSuccess, (state, action) => {
+    return {
+      ...state,
+      data: action.data
+    }
+  }),
+  on(InscriptionsActions.loadInscriptionsFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error
+    }
+  }),
+  on(InscriptionsActions.loadUser, (state) => state),
+  on(InscriptionsActions.loadUserSuccess, (state, action) => {
+    return {
+      ...state,
+      user: action.data,
+    }
+  }),
+  on(InscriptionsActions.loadCourse, (state) => state),
+  on(InscriptionsActions.loadCourseSuccess, (state, action) => {
+    return {
+      ...state,
+      course: action.data,
+    }
+  })
 );
 
 export const inscriptionsFeature = createFeature({
