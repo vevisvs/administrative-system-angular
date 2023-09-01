@@ -3,12 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Course } from '../../models/course';
 
-// interface CourseFormData {
-//  title: string | null;
-//  startDate: Date | null;
-//  finalDate: Date | null;
-// }
-
 @Component({
  selector: 'app-modal-form',
  templateUrl: './modal-form.component.html',

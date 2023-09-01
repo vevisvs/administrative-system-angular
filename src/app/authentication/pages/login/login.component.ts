@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -10,8 +10,11 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginComponent {
 
   sesionForm: FormGroup;
+  invalidCredentials = false;
 
-  constructor(private authService: AuthService, private fb:FormBuilder){
+  constructor(private cdr: ChangeDetectorRef,
+    private authService: AuthService,
+    private fb:FormBuilder){
     this.sesionForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -55,6 +58,10 @@ export class LoginComponent {
     return this.password?.errors;
   }
 
+  isInvalidCredentials(): boolean {
+    return this.authService.isInvalidCredentials();
+  }
+
   login() {
     if(this.sesionForm.valid){
         const payload = {
@@ -64,6 +71,9 @@ export class LoginComponent {
       this.authService.loginAdmin(payload, this.sesionForm.value.userType);
     } else{
       this.sesionForm.markAllAsTouched();
+      this.cdr.detectChanges();
     }
   }
 }
+
+

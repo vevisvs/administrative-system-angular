@@ -15,7 +15,7 @@ import { CommonModule } from "@angular/common";
         pathMatch: 'full'
       },
       {
-        path: 'courses/:id',
+        path: 'courses/:courseId',
         component: InfoDetailComponent
       }
     ])

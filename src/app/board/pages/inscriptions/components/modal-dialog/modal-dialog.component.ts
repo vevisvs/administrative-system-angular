@@ -25,7 +25,6 @@ export class ModalDialogComponent{
       this.inscriptionForm = this.formBuilder.group({
         userId: ['', [Validators.required]],
         courseId: ['', [Validators.required]],
-        // dateOfInscription: ['', [Validators.required]]
       }),
       this.users$ = this.store.select(selectUsers);
       this.courses$ = this.store.select(selectCourses);
@@ -39,7 +38,6 @@ export class ModalDialogComponent{
     } else {
       this.store.dispatch(InscriptionsActions.createInscription({payload: this.inscriptionForm.getRawValue()}));
       this.dialogRef.close()
-      // console.log(this.inscriptionForm.getRawValue());
     }
 
   }

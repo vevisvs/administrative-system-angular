@@ -25,7 +25,6 @@ export class CoursesComponent implements OnInit{
       .afterClosed().subscribe({
         next: (value) => {
           if(value){
-            console.log("valor en componente:", value)
             this.courseService.add({
               title: value.title,
               startDate: value.startDate,

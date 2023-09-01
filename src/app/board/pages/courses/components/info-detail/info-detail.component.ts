@@ -16,7 +16,7 @@ export class InfoDetailComponent {
     private rutaActiva: ActivatedRoute,
     private courseService: CourseService)
     {
-      const courseId = this.rutaActiva.snapshot.params;
+      const courseId = this.rutaActiva.snapshot.params['courseId'];
       if(courseId){
         const convertId = Number(courseId)
         this.courseService.getCourseById(convertId).subscribe({

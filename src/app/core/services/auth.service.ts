@@ -17,6 +17,7 @@ export class AuthService {
   public authAdmin$ = this._authAdmin$.asObservable();
   private adminApiUrl = 'http://localhost:3000/admins';
   private userApiUrl = 'http://localhost:3000/users';
+  private invalidCredentials: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -61,10 +62,15 @@ export class AuthService {
             localStorage.setItem('userData', JSON.stringify(authData));
             this.setUserType(userType);
           } else {
+            this.invalidCredentials = true;
             this._authAdmin$.next(null);
           }
         }
       });
+  }
+
+  isInvalidCredentials(): boolean {
+    return this.invalidCredentials;
   }
 
   private handleError(error: HttpErrorResponse) {
