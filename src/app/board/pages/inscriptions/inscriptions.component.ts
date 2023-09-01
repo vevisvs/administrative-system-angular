@@ -6,6 +6,7 @@ import { selectInscriptions } from './store/inscriptions.selectors';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { InscriptionsActions } from './store/inscriptions.actions';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 @Component({
@@ -16,10 +17,11 @@ import { InscriptionsActions } from './store/inscriptions.actions';
 export class InscriptionsComponent implements OnInit{
 
   inscriptions$: Observable<InscriptionComplete[]>
+  public roleType: string;
 
-  constructor(private store: Store,  public matDialog: MatDialog){
+  constructor(private store: Store,  public matDialog: MatDialog, public as: AuthService){
     this.inscriptions$ = this.store.select(selectInscriptions)
-    console.log(this.store.select(selectInscriptions))
+    this.roleType = this.as.getUserType();
   }
 
   ngOnInit(): void {

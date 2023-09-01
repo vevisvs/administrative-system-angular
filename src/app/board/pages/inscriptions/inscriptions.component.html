@@ -22,7 +22,7 @@
   <ng-container matColumnDef="options">
     <th mat-header-cell *matHeaderCellDef appFontsize>Acciones</th>
     <td mat-cell *matCellDef="let inscription">
-      <button mat-raised-button color="warn" (click)="deleteInscription(inscription.id)">Eliminar</button>
+      <button mat-raised-button color="warn" (click)="deleteInscription(inscription.id)" [disabled]="roleType !== 'admin'">Eliminar</button>
     </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
