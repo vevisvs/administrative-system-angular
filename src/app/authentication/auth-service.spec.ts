@@ -32,7 +32,8 @@ describe('Test del "AuthService"', () => {
       email: 've@example.com',
       password: '123456789'
     };
-    authService.loginAdmin(payload);
+    const userType = 'admin';
+    authService.loginAdmin(payload, userType);
     const pathUrl = `http://localhost:3000/admins?email=${payload.email}&password=${payload.password}`
     const response: Users[] = []
     const required = httpTestingController.expectOne({

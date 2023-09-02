@@ -21,26 +21,6 @@ export class UsersComponent {
       this.usersCount();
   };
 
-  // openDialog(): void {
-  //   this.dialog.open(ModalUsersComponent).afterClosed().subscribe({
-  //     next: (result) => {
-  //       if(result){
-  //         this.userService.addUser(
-  //           {
-  //             id: Date.now() + Math.floor(Math.random() * 1000),
-  //             name: result.name,
-  //             lastname: result.lastname,
-  //             email: result.email,
-  //             country: result.country,
-  //             phone: result.phone
-  //           }
-  //         );
-  //       } else{
-  //         console.log("No se recibió ninguna información")
-  //       }
-  //     }
-  //   });
-  // }
   openDialog(): void {
     const token = createToken(25);
     const newUser = {
