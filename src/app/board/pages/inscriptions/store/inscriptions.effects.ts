@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, mergeMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { InscriptionsActions } from './inscriptions.actions';
 import { HttpClient } from '@angular/common/http';
@@ -81,6 +81,21 @@ export class InscriptionsEffects {
     );
   });
 
+  loadUserInscriptions$ = createEffect(() => {
+  return this.actions$.pipe(
+    ofType(InscriptionsActions.loadUserInscriptions),
+    mergeMap((action) =>
+      this.getUserInscriptions(action.userId).pipe(
+        map((inscriptions) =>
+          InscriptionsActions.loadUserInscriptionsSuccess({ inscriptions })
+        ),
+        catchError((error) =>
+          of(InscriptionsActions.loadUserInscriptionsFailure({ error }))
+        )
+      )
+    )
+  )});
+
   private createInscription(data: CreateInscription): Observable<Inscription> {
     return this.http.post<Inscription>('http://localhost:3000/inscriptions', data)
   }
@@ -101,5 +116,9 @@ export class InscriptionsEffects {
     return this.http.get<Course[]>('http://localhost:3000/courses');
   }
 
+  private getUserInscriptions(userId: number): Observable<InscriptionComplete[]> {
+    const url = `http://localhost:3000/inscriptions?userId=${userId}&_expand=course`;
+    return this.http.get<InscriptionComplete[]>(url);
+  }
 
 }

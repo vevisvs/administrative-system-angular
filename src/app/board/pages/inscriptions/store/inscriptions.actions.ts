@@ -26,5 +26,9 @@ export const InscriptionsActions = createActionGroup({
     'Load Course': emptyProps(),
     'Load Course Success': props<{ data: Course[] }>(),
     'Load Course Failure': props<{ error: HttpErrorResponse }>(),
+
+    'Load User Inscriptions': props<{ userId: number }>(),
+    'Load User Inscriptions Success': props<{ inscriptions: any[] }>(),
+    'Load User Inscriptions Failure': props<{ error: any }>(),
   }
 });

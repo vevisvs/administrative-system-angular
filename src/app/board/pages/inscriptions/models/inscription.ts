@@ -16,3 +16,7 @@ export interface InscriptionComplete extends Inscription {
   course: Course;
   user: Users;
 }
+
+// export interface userInscription {
+
+// }

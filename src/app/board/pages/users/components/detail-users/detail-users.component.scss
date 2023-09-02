@@ -1,10 +1,30 @@
 .example-card{
+  width: 700px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+mat-card{
   width: 400px;
   height: 550px;
 }
 
+.course-card{
+  height: 100px;
+  width: 250px;
+  margin-left: 2rem;
+}
+
+.subtitles{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 img{
   border-radius: 50%;
+  width: 100%;
 }
 
 .btn-back{

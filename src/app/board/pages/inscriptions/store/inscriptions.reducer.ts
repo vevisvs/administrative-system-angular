@@ -11,6 +11,7 @@ export interface State {
   user: Users[];
   course: Course[];
   error: unknown;
+  inscriptionByUser: InscriptionComplete[];
 }
 
 export const initialState: State = {
@@ -18,6 +19,7 @@ export const initialState: State = {
   user: [],
   course: [],
   error: null,
+  inscriptionByUser: [],
 };
 
 export const reducer = createReducer(
@@ -59,7 +61,21 @@ export const reducer = createReducer(
       ...state,
       course: action.data,
     }
-  })
+  }),
+  on(InscriptionsActions.loadUserInscriptionsSuccess, (state, action) => {
+    return {
+      ...state,
+      inscriptionByUser: action.inscriptions,
+      error: null,
+    };
+  }),
+  on(InscriptionsActions.loadUserInscriptionsFailure, (state, action) => {
+    return {
+      ...state,
+      inscriptionByUser: [],
+      error: action.error,
+    };
+  }),
 );
 
 export const inscriptionsFeature = createFeature({

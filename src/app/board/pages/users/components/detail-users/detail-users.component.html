@@ -1,15 +1,25 @@
-<button mat-raised-button color="primary" class="btn-back" (click)="goBack()">Volver</button>
+<button mat-raised-button color="primary" class="btn-back" (click)="goBack()" >Volver</button>
 <h2>Detalle del alumno</h2>
 
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-subtitle>ID: {{userDetail?.id}}</mat-card-subtitle>
-    <mat-card-title>{{userDetail?.name}} {{userDetail?.lastname}}</mat-card-title>
-  </mat-card-header>
-  <img cat-card-image src="../../../../../../assets/skeleton2.png">
-  <mat-card-content>
-    <mat-card-subtitle>Contacto: {{userDetail?.phone}}</mat-card-subtitle>
-    <mat-card-subtitle>Ubicación: {{userDetail?.country}}</mat-card-subtitle>
-    <mat-card-subtitle>Email: {{userDetail?.email}}</mat-card-subtitle>
-  </mat-card-content>
-</mat-card>
+<div class="example-card">
+  <mat-card >
+    <mat-card-header>
+      <mat-card-subtitle>ID: {{userDetail?.id}}</mat-card-subtitle>
+      <mat-card-title>{{userDetail?.name}} {{userDetail?.lastname}}</mat-card-title>
+    </mat-card-header>
+    <img cat-card-image src="../../../../../../assets/skeleton2.png">
+    <mat-card-content>
+      <mat-card-subtitle>Contacto: {{userDetail?.phone}}</mat-card-subtitle>
+      <mat-card-subtitle>Ubicación: {{userDetail?.country}}</mat-card-subtitle>
+      <mat-card-subtitle>Email: {{userDetail?.email}}</mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="course-card">
+    <mat-card-content class="subtitles">
+      <mat-card-title>Inscrito al curso:</mat-card-title>
+      <p>{{ userCourseTitle ? userCourseTitle : 'No inscrito en un curso' }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
