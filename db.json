@@ -2,7 +2,7 @@
   "admins": [
     {
       "name": "Gonzalo",
-      "lastname": "Ramirez",
+      "lastname": "Gimenez",
       "email": "gonzy@example.com",
       "password": "go0123456",
       "id": 1693078332150,
@@ -22,14 +22,14 @@
   "courses": [
     {
       "title": "Java",
-      "startDate": "2023-07-24T00:00:00.000Z",
-      "finalDate": "2023-09-15T00:00:00.000Z",
+      "startDate": "2023-09-18T03:00:00.000Z",
+      "finalDate": "2023-11-27T03:00:00.000Z",
       "id": 1
     },
     {
       "title": "Angular",
-      "startDate": "2023-08-23T03:00:00.000Z",
-      "finalDate": "2023-10-20T03:00:00.000Z",
+      "startDate": "2023-09-25T03:00:00.000Z",
+      "finalDate": "2023-11-30T03:00:00.000Z",
       "id": 2
     },
     {
@@ -110,8 +110,8 @@
     {
       "id": 1693517075947,
       "name": "Christian",
-      "lastname": "Paz",
-      "email": "ch@example.com",
+      "lastname": "Schmidth",
+      "email": "chris@example.com",
       "password": "chris000",
       "country": "Uruguay",
       "phone": "099825499",

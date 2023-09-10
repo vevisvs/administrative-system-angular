@@ -63,20 +63,20 @@ export class CourseService {
     ).subscribe();
   }
 
-  toUpdate(course: Course): void {
-    this.http.put<Course>(this.urlCourses + "/" + course.id, course).pipe(
-      mergeMap(response => this.courses$.pipe(
-        take(1),
-        map(courses => {
-          const index = courses.findIndex(c => c.id === course.id);
-          if (index !== -1) {
-            this.courses[index] = { ...this.courses[index], ...course };
+  toUpdate(course: Course): void{
+    this.http.put(this.urlCourses + "/" + course.id, course).pipe(
+      tap(() => {
+        const updatedData = this.courses$.getValue().map(existingCourse => {
+          if (existingCourse.id === course.id) {
+            return { ...existingCourse, ...course };
           }
-          return this.courses;
-        })
-      )),
-      tap(updatedCourses => {
-        this.courses$.next(updatedCourses);
+          return existingCourse;
+        });
+        this.courses$.next(updatedData);
+      }),
+      catchError(error => {
+        console.error('Error al editar los datos del curso:', error);
+        return throwError(() => new Error('Error al editar los datos del curso'));
       })
     ).subscribe();
   }

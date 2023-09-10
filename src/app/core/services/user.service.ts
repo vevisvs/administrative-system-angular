@@ -65,24 +65,21 @@ export class UserService {
     ).subscribe();
   }
 
-  onEdit(userToModify: Users) {
-  this.httpClient.put<Users>(this.urlUsers + "/" + userToModify.id, userToModify).pipe(
-    mergeMap(result => this.users$.pipe(
-      take(1),
-      map(value => {
-        const index = this.users$.getValue().findIndex(u => u.id === userToModify.id);
-        if (index !== -1) {
-          this.users[index] = { ...this.users[index], ...userToModify };
+
+onEdit(userToModify: Users){
+  this.httpClient.put(this.urlUsers + "/" + userToModify.id, userToModify).pipe(
+    tap(() => {
+      const updatedUsers = this.users$.getValue().map(existingUser => {
+        if (existingUser.id === userToModify.id) {
+          return { ...existingUser, ...userToModify };
         }
-        return this.users;
-      })
-    )),
-    tap(updatedUsers => {
+        return existingUser;
+      });
       this.users$.next(updatedUsers);
     }),
     catchError(error => {
       console.error('Error al editar el usuario:', error);
-      return throwError(() => new Error("Ocurrio un error al intentar editar al usuario"));
+      return throwError(() => new Error('Error al editar los datos del usuario'));
     })
   ).subscribe();
 }
