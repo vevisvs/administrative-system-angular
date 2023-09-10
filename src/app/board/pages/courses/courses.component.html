@@ -1,4 +1,4 @@
 
-<button mat-raised-button color="primary" (click)="addCourse()" class="add-btn">Agregar</button>
+<button mat-raised-button color="primary" (click)="addCourse()" class="add-btn" [disabled]="role === 'user'">Agregar</button>
 <h2>Listado de cursos</h2>
 <app-table-courses [dataSource]="(courses | async) || []"  (eliminate)="eliminate($event)" (update)="update($event)"></app-table-courses>

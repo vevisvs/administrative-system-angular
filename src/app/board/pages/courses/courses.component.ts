@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalFormComponent } from './components/modal-form/modal-form.component';
 import { CourseService } from 'src/app/core/services/course.service';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-courses',
@@ -12,7 +13,13 @@ import { Observable } from 'rxjs';
 })
 
 export class CoursesComponent implements OnInit{
-  constructor(private dialog: MatDialog, private courseService: CourseService){}
+  public role: string;
+
+  constructor(private dialog: MatDialog,
+    private courseService: CourseService,
+    private authService: AuthService){
+      this.role = this.authService.getUserType();
+    }
 
   courses!: Observable<Course[]>;
 

@@ -5,6 +5,7 @@ import { Users } from './models/users';
 import { UserService } from 'src/app/core/services/user.service';
 import { Observable } from 'rxjs';
 import { createToken } from 'src/app/core/helpers/token-helper';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -15,10 +16,12 @@ export class UsersComponent {
 
   alumnos$: Observable<Users[]>;
   totalUsers = 0;
+  public role: string;
 
-  constructor(public dialog: MatDialog, private userService: UserService) {
+  constructor(public dialog: MatDialog, private userService: UserService, private auth: AuthService) {
       this.alumnos$ = this.userService.getUsers();
       this.usersCount();
+      this.role = this.auth.getUserType();
   };
 
   openDialog(): void {

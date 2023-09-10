@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { AdminService } from 'src/app/core/services/admin.service';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-admins',
@@ -18,9 +19,12 @@ export class AdminsComponent implements OnInit{
     password: ""
   }
 
+  public role: string;
   admins$!: Observable<Admin[]>;
 
-  constructor(public dialog: MatDialog, private adminService: AdminService){}
+  constructor(public dialog: MatDialog, private adminService: AdminService, private as: AuthService){
+    this.role = this.as.getUserType();
+  }
 
   ngOnInit(): void{
     this.admins$ = this.adminService.getAdmins();
