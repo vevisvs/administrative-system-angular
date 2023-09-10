@@ -59,7 +59,7 @@
   </div>
 <div mat-dialog-actions class="p-d-flex justify-content-end">
   <button mat-raised-button color="accent" (click)="cancel()">Cancelar</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="data" (click)="save()" cdkFocusInitial>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="adminForm.invalid" (click)="save()" cdkFocusInitial>
     {{data.name ? "Editar" : "Agregar"}}
   </button>
 </div>

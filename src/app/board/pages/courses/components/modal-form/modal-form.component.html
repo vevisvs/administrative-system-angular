@@ -40,7 +40,7 @@
 </div>
 <div class="flex justify-content-end" mat-dialog-actions>
   <button mat-raised-button color="accent" mat-dialog-close>Cancelar</button>
-  <button (click)="submitForm()" type="submit" mat-raised-button color="primary">
+  <button [disabled]="coursesForm.invalid" (click)="submitForm()" type="submit" mat-raised-button color="primary">
     {{dataToEdit ? "Editar" : "Agregar"}}
   </button>
 </div>
