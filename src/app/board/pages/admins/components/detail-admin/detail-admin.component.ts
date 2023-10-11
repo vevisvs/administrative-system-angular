@@ -8,7 +8,7 @@ import { Admin } from '../../models/admin';
   templateUrl: './detail-admin.component.html',
   styleUrls: ['./detail-admin.component.scss']
 })
-export class DetailAdminComponent implements OnInit{
+export class DetailAdminComponent {
   constructor(private route: Router, private adminService: AdminService, private activatedRoute: ActivatedRoute){}
 
   admin: Admin | undefined;
@@ -20,13 +20,11 @@ export class DetailAdminComponent implements OnInit{
   ngOnInit(): void {
     let dataIdRoute = this.activatedRoute.snapshot.paramMap.get('id');
     if(dataIdRoute){
-      const dataId = Number(dataIdRoute)
-      this.adminService.getAdminById(dataId).subscribe({
+      this.adminService.getAdminById(dataIdRoute).subscribe({
         next:(result) => this.admin = result
       })
     } else{
       this.route.navigate(['board', 'admins'])
     }
-
   }
 }

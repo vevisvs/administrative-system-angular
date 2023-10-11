@@ -9,6 +9,7 @@ import { DetailAdminComponent } from './components/detail-admin/detail-admin.com
 import { AdminsRoutingModule } from './admins-routing.module';
 import { RouterModule } from '@angular/router';
 
+
 @NgModule({
   declarations: [
     AdminsComponent,
@@ -22,7 +23,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     AdminsRoutingModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     AdminsComponent

@@ -64,6 +64,11 @@ export class UserService {
       })
     ).subscribe();
   }
+  /*
+  addUser(user: Users): Promise<Users>{
+    return this.firestore.colletion('users').add(user);
+  }
+  */
 
 
 onEdit(userToModify: Users){

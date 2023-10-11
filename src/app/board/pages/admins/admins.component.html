@@ -1,5 +1,9 @@
 <button mat-raised-button color="primary" (click)="add()" [disabled]="role === 'user'">Agregar Administrador</button>
 <ng-container *ngIf="admins$ | async as administrators" >
-  <app-list-admins [dataSource]="administrators" (delete)="delete($event)" (edit)="edit($event)"></app-list-admins>
+  <app-list-admins [dataSource]="administrators"
+    (delete)="delete($event)"
+    (edit)="edit($event)"
+    >
+  </app-list-admins>
 </ng-container>
 

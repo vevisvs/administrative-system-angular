@@ -26,42 +26,46 @@ export class AdminsComponent implements OnInit{
     this.role = this.as.getUserType();
   }
 
-  ngOnInit(): void{
+  ngOnInit():void{
     this.admins$ = this.adminService.getAdmins();
   }
 
-  add(): void{
+  add(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: {data: this.dataAdmin},
+      data: { data: this.dataAdmin },
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.dataAdmin = result;
-      this.adminService.addAdmin({
-        id: Date.now() + Math.floor(Math.random() * 1000),
-        name: result.name,
-        lastname: result.lastname,
-        email: result.email,
-        password: result.password,
-        role: "Administrador"
-      })
+      if (result) {
+        const adminAdded = {
+          ...result,
+          role: 'Administrador'
+        };
+        console.log("Nuevo administrador:", adminAdded);
+        this.adminService.addAdmin(adminAdded).then(() => {
+          this.admins$ = this.adminService.getAdmins();
+        });
+      }
     });
   }
 
-  delete(adminId: number): void{
+  delete(adminId: string): void{
     this.adminService.deleteAdmin(adminId)
   }
 
-  edit(admin: Admin): void{
+  edit(admin: Admin): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: {...admin}
+      data: { ...admin },
     });
     dialogRef.afterClosed().subscribe({
       next: (adminModificated) => {
-        if(adminModificated){
-          adminModificated.token = admin.token;
-          this.adminService.editAdmin(adminModificated)
+        if (adminModificated) {
+          this.adminService.findAdmin(adminModificated).subscribe((doc) => {
+            if (doc) {
+              this.adminService.editAdmin(adminModificated, doc.id);
+            }
+          });
         }
-      }
-    })
+      },
+    });
   }
 }

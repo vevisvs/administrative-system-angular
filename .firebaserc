@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "crud-admin-system-angular": {
+      "hosting": {
+        "administrative-system-courses": [
+          "crud-admin-system-angular"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "crud-admin-system-angular"
+  }
+}

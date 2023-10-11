@@ -1,85 +1,88 @@
 import { Injectable } from '@angular/core';
 import { Admin } from 'src/app/board/pages/admins/models/admin';
-import { BehaviorSubject, Observable, map, tap, mergeMap, take} from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { createToken } from '../helpers/token-helper';
+import { BehaviorSubject, Observable, from, of } from 'rxjs';
+import { switchMap, catchError } from 'rxjs/operators';
+import { Firestore, collectionData, } from '@angular/fire/firestore';
+import { doc, collection, deleteDoc, addDoc, updateDoc, query, getDocs, getDoc, where } from '@firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  constructor(private httpClient: HttpClient) {
-    this.loadingDataTo();
-   }
-
   private adminUsers: Admin[] = [];
-  private urlAdmins = 'http://localhost:3000/admins';
   private administrators$: BehaviorSubject<Admin[]> = new BehaviorSubject<Admin[]>(this.adminUsers);
 
+  constructor(private firestore: Firestore) { }
 
-  loadingDataTo(): void {
-    this.httpClient.get<Admin[]>(this.urlAdmins, {
-      headers: new HttpHeaders({
-        'token': '1234456jhkjlk'
-      }),
-    }).pipe(
-      tap(admins => this.administrators$.next(admins)),
-      catchError(error => {
-        console.error('Error al cargar datos de administradores:', error);
-        return throwError(() => new Error('Error al cargar los datos'));
-      })
-    ).subscribe();
-  }
 
   getAdmins(): Observable<Admin[]>{
-    return this.administrators$.asObservable();
+    const adminRef = collection(this.firestore, 'admins');
+		return collectionData(adminRef, {idField: 'id'
+		}) as Observable<Admin[]>;
   }
 
-  addAdmin(userAdmin: Admin): void{
-    const token = createToken(25)
-    this.httpClient.post<Admin>(this.urlAdmins, {...userAdmin, token, role: "Administrador"}).pipe(
-      tap(newData => {
-        const dataUpdated = [...this.administrators$.getValue(), newData];
-        this.administrators$.next(dataUpdated)
-      })
-    ).subscribe();
+
+  addAdmin(userAdmin: Admin){
+    console.log("user a agregar en service:", userAdmin)
+    const adminRef = collection(this.firestore, 'admins');
+    return addDoc(adminRef, userAdmin)
   }
 
-  deleteAdmin(adminId: number): void {
-    this.httpClient.delete<Admin>(this.urlAdmins + "/" + adminId)
-      .pipe(mergeMap(response => this.administrators$.pipe(
-        take(1),
-        map((oldValue) => oldValue.filter((admin) => admin.id !== adminId))
-      )))
-      .subscribe({
-        next: (valueUpdated) => {
-          this.administrators$.next(valueUpdated);
+  deleteAdmin(adminId: string){
+    const adminRefDoc = doc(this.firestore, `admins/${adminId}`);
+		return deleteDoc(adminRefDoc);
+  }
+
+  findAdmin(admin: Admin): Observable<{ id: string, data: Admin } | null> {
+    const adminRef = collection(this.firestore, 'admins');
+    const adminQuery = query(adminRef, where('email', '==', admin.email));
+    return from(getDocs(adminQuery)).pipe(
+      switchMap((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          const doc = querySnapshot.docs[0];
+          const adminData = doc.data() as Admin;
+          return of({ id: doc.id, data: adminData });
+        } else {
+          return of(null);
         }
-      });
+      }),
+      catchError((error) => {
+        console.error('Error al buscar el administrador:', error);
+        return of(null);
+      })
+    );
   }
 
-  editAdmin(admin: Admin): void{
-    this.httpClient.put(this.urlAdmins + "/" + admin.id, admin).pipe(
-      tap(() => {
-        const updatedAdministrators = this.administrators$.getValue().map(existingAdmin => {
-          if (existingAdmin.id === admin.id) {
-            return { ...existingAdmin, ...admin };
-          }
-          return existingAdmin;
-        });
-        this.administrators$.next(updatedAdministrators);
+  editAdmin(updatedAdmin: Admin, documentId: string): Promise<void> {
+    const adminRefDoc = doc(this.firestore, 'admins', documentId );
+    const updatedData = {
+      name: updatedAdmin.name,
+      lastname: updatedAdmin.lastname,
+      email: updatedAdmin.email,
+      password: updatedAdmin.password,
+      role: updatedAdmin.role
+    };
+    return updateDoc(adminRefDoc, updatedData);
+  }
+
+  getAdminById(adminId: string): Observable<Admin | undefined> {
+    const adminRefDoc = doc(this.firestore, 'admins', adminId);
+
+    return from(getDoc(adminRefDoc)).pipe(
+      switchMap(docSnap => {
+        if (docSnap.exists()) {
+          const adminData = docSnap.data() as Admin;
+          return of({ id: docSnap.id, ...adminData });
+        } else {
+          return of(undefined);
+        }
       }),
       catchError(error => {
-        console.error('Error al editar el administrador:', error);
-        return throwError(() => new Error('Error al editar los datos'));
+        console.error('Error al obtener el administrador por ID:', error);
+        return of(undefined);
       })
-    ).subscribe();
+    );
   }
 
-  getAdminById(adminId: number): Observable<Admin | undefined>{
-    return this.administrators$.pipe(map(admin => admin.find(user => user.id === adminId)))
-  }
 }

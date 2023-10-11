@@ -28,16 +28,17 @@ export class DialogComponent {
   }
 
   save(): void{
-    if(this.data.id){
-      const dataWithToken = {
+    if(this.data.name){
+      const dataToEdit = {
         ...this.adminForm.value
       }
-      const userId = this.data.id
+      // const userId = this.data.id
       const roleAdmin = this.data.role
-      dataWithToken['token'] = this.data.token
-      this.dialogRef.close({...this.adminForm.value, id: userId, role: roleAdmin});
+      // dataWithToken['token'] = this.data.token
+      this.dialogRef.close({...this.adminForm.value, role: roleAdmin});
     } else{
-      this.dialogRef.close(this.adminForm.value)
+      console.log("data creada nueva:", this.adminForm.value)
+      this.dialogRef.close({...this.adminForm.value, role: "Administrador"})
     }
   }
 

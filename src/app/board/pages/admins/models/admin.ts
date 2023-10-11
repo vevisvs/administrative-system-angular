@@ -1,10 +1,10 @@
 export interface Admin {
-  id: number,
+  // id: string,
   name: string,
   lastname: string,
   email: string,
   password: string,
-  token?: string,
+  // token?: string,
   role: string
 }
 
@@ -12,21 +12,22 @@ export interface DialogData {
   name: string;
   lastname: string;
   email: string;
-  password: string
+  password: string;
+  role?: string;
 }
 
 export interface DataEdit{
-  id?: number,
+  // id?: string,
   name: string,
   lastname: string,
   email: string,
   password: string,
-  token: string,
+  // token: string,
   role: string
 }
 
 export interface AdminLogin{
-  id: number,
+  id: string,
   name: string,
   lastname: string,
   email: string,
