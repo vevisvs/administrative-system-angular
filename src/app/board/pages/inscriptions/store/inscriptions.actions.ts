@@ -15,8 +15,8 @@ export const InscriptionsActions = createActionGroup({
     'Create Inscription Success': props<{ data: Inscription }>(),
     'Create Inscription Failure': props<{ error: HttpErrorResponse }>(),
 
-    'Delete Inscription': props<{ id: number }>(),
-    'Delete Inscription Success': props<{ id: number }>(),
+    'Delete Inscription': props<{ id: string }>(),
+    'Delete Inscription Success': props<{ id: string }>(),
     'Delete Inscription Failure': props<{ error: HttpErrorResponse }>(),
 
     'Load User': emptyProps(),
@@ -27,7 +27,7 @@ export const InscriptionsActions = createActionGroup({
     'Load Course Success': props<{ data: Course[] }>(),
     'Load Course Failure': props<{ error: HttpErrorResponse }>(),
 
-    'Load User Inscriptions': props<{ userId: number }>(),
+    'Load User Inscriptions': props<{ userId: string}>(),
     'Load User Inscriptions Success': props<{ inscriptions: any[] }>(),
     'Load User Inscriptions Failure': props<{ error: any }>(),
   }

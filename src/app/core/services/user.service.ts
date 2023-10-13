@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Users } from 'src/app/board/pages/users/models/users';
-import { BehaviorSubject, map, tap, mergeMap, take, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { createToken } from '../helpers/token-helper';
+import { BehaviorSubject, from, of } from 'rxjs';
+import { catchError, switchMap} from 'rxjs/operators';
+import { Firestore, collectionData, } from '@angular/fire/firestore';
+import { doc, collection, deleteDoc, addDoc, updateDoc, query, getDocs, getDoc, where } from '@firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -12,97 +12,82 @@ import { createToken } from '../helpers/token-helper';
 export class UserService {
 
   private users: Users[] = []
-
-  constructor(private httpClient: HttpClient) {
-    this.loadData();
-  }
-
-  private urlUsers = "http://localhost:3000/users"
   private users$: BehaviorSubject<Users[]> = new BehaviorSubject<Users[]>(this.users);
 
-  loadData(): void {
-    this.httpClient.get<Users[]>(this.urlUsers, {
-      headers: new HttpHeaders({
-        'token': '1554456jhkjlk'
-      }),
-    }).pipe(
-      tap(u => this.users$.next(u)),
-      catchError(error => {
-        console.log("error al cargar los datos de los usuarios", error)
-        return throwError(() => new Error('Hubo un error al cargar a los usuarios'))
-      })
-    ).subscribe();
-  }
+  constructor(private firestore: Firestore) {}
 
   getUsers(): Observable<Users[]> {
-    return this.users$.asObservable();
+    const usersRefDoc = collection(this.firestore, 'users');
+    return collectionData(usersRefDoc, {idField: 'id'}) as Observable<Users[]>;
   }
 
-  getTotal(): Observable<number> {
-    return this.users$.pipe(
-      map(users => users.length)
-    );
+  async getTotalUsersCount(): Promise<number> {
+   const refDoc = collection(this.firestore, 'users');
+   const querySnapshot = await getDocs(refDoc)
+   return querySnapshot.size;
   }
 
-  getUserById(userId: number): Observable<Users | undefined> {
-    console.log("detalle del usuario:", userId)
-    return this.users$.pipe(
-      map(users => users.find(user => user.id === userId))
-    );
-  }
-
-  addUser(user: Users): void {
-    const token = createToken(25)
-    this.httpClient.post<Users>(this.urlUsers, {...user, token}).pipe(
-      tap(createdData => {
-        const newData = [...this.users$.getValue(), createdData]
-        this.users$.next(newData)
-      }),
-      catchError(err => {
-        console.log("Algo salió mal", err);
-        return throwError(() => new Error("Ocurrió un error al intentar agregar un usuario"))
-      })
-    ).subscribe();
-  }
-  /*
-  addUser(user: Users): Promise<Users>{
-    return this.firestore.colletion('users').add(user);
-  }
-  */
-
-
-onEdit(userToModify: Users){
-  this.httpClient.put(this.urlUsers + "/" + userToModify.id, userToModify).pipe(
-    tap(() => {
-      const updatedUsers = this.users$.getValue().map(existingUser => {
-        if (existingUser.id === userToModify.id) {
-          return { ...existingUser, ...userToModify };
+  findUserId(user: Users): Observable<{ id: string, data: Users } | null> {
+    const userRef = collection(this.firestore, 'users');
+    const queryUser = query(userRef, where('email', '==', user.email));
+    return from(getDocs(queryUser)).pipe(
+      switchMap((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          const doc = querySnapshot.docs[0];
+          const userData = doc.data() as Users;
+          return of({ id: doc.id, data: userData });
+        } else {
+          return of(null);
         }
-        return existingUser;
-      });
-      this.users$.next(updatedUsers);
-    }),
-    catchError(error => {
-      console.error('Error al editar el usuario:', error);
-      return throwError(() => new Error('Error al editar los datos del usuario'));
-    })
-  ).subscribe();
-}
+      }),
+      catchError((error) => {
+        console.error('Error al buscar el usuario:', error);
+        return of(null);
+      })
+    );
+  }
 
-onDelete(userId: number){
-  this.httpClient.delete<Users>(this.urlUsers + "/" + userId).pipe(
-    tap(value => {
-      const arrayFilter = this.users$.getValue().filter((user) => user.id !== userId);
-      const filteredUsers = [...arrayFilter]
-      this.users$.next(filteredUsers)
-    }),
-    catchError(error => {
-      console.log("Ocurrio un error", error);
-      return throwError(() => new Error("Ocurrio un error al intentar eliminar al usuario"))
-    })
-  ).subscribe();
-}
+  getUserById(userId: string): Observable<Users | undefined> {
+    const userRefDoc = doc(this.firestore, 'users', userId);
+    return from(getDoc(userRefDoc)).pipe(
+      switchMap(docSnap => {
+        if (docSnap.exists()) {
+          const adminData = docSnap.data() as Users;
+          return of({ id: docSnap.id, ...adminData });
+        } else {
+          return of(undefined);
+        }
+      }),
+      catchError(error => {
+        console.error('Error al obtener al usuario por ID:', error);
+        return of(undefined);
+      })
+    );
+  }
 
+  addUser(user: Users){
+    const userRefDoc = collection(this.firestore, 'users');
+    return addDoc(userRefDoc, user)
+  }
+
+  onEdit(userToModify: Users, userId: string): Promise<void>{
+    const userRefDoc = doc(this.firestore, 'users', userId);
+    const data = {
+      name: userToModify.name,
+      lastname: userToModify.lastname,
+      email: userToModify.email,
+      password: userToModify.password,
+      country: userToModify.country,
+      phone: userToModify.phone,
+      role: userToModify.role
+    };
+    return updateDoc(userRefDoc, data)
+  }
+
+  onDelete(userId: string){
+    const userRefDoc = doc(this.firestore, 'users', userId);
+    return deleteDoc(userRefDoc)
+  }
 
 }
 

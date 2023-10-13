@@ -100,7 +100,7 @@ export class InscriptionsEffects {
     return this.http.post<Inscription>('http://localhost:3000/inscriptions', data)
   }
 
-  private deleteInscription(id: number): Observable<Inscription> {
+  private deleteInscription(id: string): Observable<Inscription> {
     return this.http.delete<Inscription>(`http://localhost:3000/inscriptions/${id}`);
   }
 
@@ -116,7 +116,7 @@ export class InscriptionsEffects {
     return this.http.get<Course[]>('http://localhost:3000/courses');
   }
 
-  private getUserInscriptions(userId: number): Observable<InscriptionComplete[]> {
+  private getUserInscriptions(userId: string): Observable<InscriptionComplete[]> {
     const url = `http://localhost:3000/inscriptions?userId=${userId}&_expand=course`;
     return this.http.get<InscriptionComplete[]>(url);
   }

@@ -34,7 +34,7 @@ export class InscriptionsComponent implements OnInit{
     this.matDialog.open(ModalDialogComponent)
   }
 
-  deleteInscription(id: number): void{
+  deleteInscription(id: string): void{
     this.store.dispatch(InscriptionsActions.deleteInscription( {id} ));
   }
 

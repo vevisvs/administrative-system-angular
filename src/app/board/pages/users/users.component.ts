@@ -25,21 +25,20 @@ export class UsersComponent {
   };
 
   openDialog(): void {
-    const token = createToken(25);
     const newUser = {
-      id: Date.now() + Math.floor(Math.random() * 1000),
       name: '',
       lastname: '',
       email: '',
       password: '',
       country: '',
       phone: '',
-      token: token
     };
     this.dialog.open(ModalUsersComponent, { data: {...newUser, role: "Usuario"}}).afterClosed().subscribe({
       next: (result) => {
         if (result) {
-          this.userService.addUser(result);
+          this.userService.addUser(result).then(() => {
+            this.alumnos$ = this.userService.getUsers();
+          });;
         } else {
           console.log("No se recibió ninguna información");
         }
@@ -49,26 +48,24 @@ export class UsersComponent {
 
   editUser(userToModify: Users): void {
     const dialogRef = this.dialog.open(ModalUsersComponent, { data: userToModify });
-    console.log("user to modify:", userToModify)
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        result.token = userToModify.token;
-        this.userService.onEdit(result)
+        this.userService.findUserId(result).subscribe((doc) => {
+          if (doc) {
+            this.userService.onEdit(result, doc.id);
+          }
+        });
       };
     });
   }
 
-  deleteUser(userId: number): void{
+  deleteUser(userId: string): void{
     this.userService.onDelete(userId);
   }
 
-  usersCount(){
-    this.userService.getTotal().subscribe({
-      next: result =>
-      this.totalUsers = result
-    });
+  async usersCount(): Promise<void>{
+    const total = await this.userService.getTotalUsersCount();
   }
-
 
 }
 

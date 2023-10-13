@@ -31,10 +31,10 @@ export class DetailUsersComponent implements OnInit {
   ngOnInit(): void {
     const userId = this.route.snapshot.paramMap.get('id');
     if (userId) {
-      const idUser = parseInt(userId, 10);
-      this.userService.getUserById(idUser).subscribe((u) => {
+      // const idUser = parseInt(userId, 10);
+      this.userService.getUserById(userId).subscribe((u) => {
       this.userDetail = u;
-      this.store.dispatch(InscriptionsActions.loadUserInscriptions({ userId: idUser }));
+      this.store.dispatch(InscriptionsActions.loadUserInscriptions({ userId: userId}));
     })
     this.store.select(selectUserInscriptions).subscribe((inscriptions) => {
       this.userInscriptions = inscriptions;

@@ -42,7 +42,7 @@ export class ModalUsersComponent {
 
   populateForm(): void {
     this.formUser.patchValue({
-      id: this.data.id,
+      // id: this.data.id,
       name: this.data.name,
       lastname: this.data.lastname,
       email: this.data.email,
@@ -68,8 +68,8 @@ export class ModalUsersComponent {
   }
 
   agregar(): void{
-    if(this.data.token){
-      this.dialogRef.close({...this.formUser.value, token: this.data.token, role: this.data.role})
+    if(this.data){
+      this.dialogRef.close({...this.formUser.value, role: this.data.role})
     }
   }
 

@@ -2,14 +2,14 @@ import { Course } from "../../courses/models/course";
 import { Users } from "../../users/models/users";
 
 export interface Inscription{
-  id: number;
-  userId: number;
-  courseId: number;
+  id: string;
+  userId: string;
+  courseId: string;
 }
 
 export interface CreateInscription {
-  userId: number | null;
-  courseId: number | null;
+  userId: string | null;
+  courseId: string | null;
 }
 
 export interface InscriptionComplete extends Inscription {
@@ -17,6 +17,4 @@ export interface InscriptionComplete extends Inscription {
   user: Users;
 }
 
-// export interface userInscription {
 
-// }
