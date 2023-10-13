@@ -2,7 +2,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { InscriptionsActions } from './inscriptions.actions';
 import { InscriptionComplete } from '../models/inscription';
 import { Users } from '../../users/models/users';
-import { Course } from '../../courses/models/course';
+import { Course } from '../../../../core/services/course.service';
 
 export const inscriptionsFeatureKey = 'inscriptions';
 

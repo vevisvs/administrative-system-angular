@@ -1,91 +1,102 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, take, tap, mergeMap, throwError } from 'rxjs';
-import { Course } from 'src/app/board/pages/courses/models/course';
-import { catchError } from 'rxjs/operators'
+import { BehaviorSubject, Observable, from, of } from 'rxjs';
+import { catchError, switchMap, map } from 'rxjs/operators';
+import { Firestore, collectionData, } from '@angular/fire/firestore';
+import { doc, collection, deleteDoc, addDoc, updateDoc, query, getDocs, getDoc, where, Timestamp } from '@firebase/firestore';
+
+export interface Course{
+  id?: string,
+  title: string | null,
+  startDate: Date | null,
+  finalDate: Date | null;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CourseService {
 
-  constructor(private http: HttpClient) {
-    this.loadingCourses();
-   }
+  constructor(private firestore: Firestore) {}
 
   courses: Course[] = []
-
-  private urlCourses = "http://localhost:3000/courses"
   private courses$: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>(this.courses)
 
-  getCourses(): Observable<Course[]>{
-    return this.courses$.asObservable();
-  }
 
-  loadingCourses(): void{
-    this.http.get<Course[]>(this.urlCourses).pipe(
-      tap(response => {
-        this.courses$.next(response)
-      }),
-      catchError(error => {
-        console.log("Hubo un error", error);
-        return throwError(() => new Error("Hubo un error al intentar obtener los cursos"))
-      })
-    ).subscribe();
-  }
-
-  add(newCourse: Course): void{
-    this.http.post<Course>(this.urlCourses, newCourse).pipe(
-      mergeMap(courseToCreated => {
-        return this.courses$.pipe(
-          take(1),
-          map((data) => [...data, {...courseToCreated, id: Date.now() + Math.floor(Math.random() * 1000)}])
-        );
-      })
-    ).subscribe({
-      next: (result) => {
-        this.courses$.next(result);
-      }
-    });
-  }
-
-  toDelete(courseId: number): void{
-    this.http.delete<Course>(this.urlCourses + "/" + courseId).pipe(
-      tap(result => {
-        const dataFiltered = this.courses$.getValue().filter((course) => course.id !== courseId)
-        const newData = [...dataFiltered]
-        this.courses$.next(newData)
-      }),
-      catchError(err => {
-        console.log("Ocurrió un error", err);
-        return throwError(() => new Error("Ocurrió un error al intentar eliminar al curso"))
-      })
-    ).subscribe();
-  }
-
-  toUpdate(course: Course): void{
-    this.http.put(this.urlCourses + "/" + course.id, course).pipe(
-      tap(() => {
-        const updatedData = this.courses$.getValue().map(existingCourse => {
-          if (existingCourse.id === course.id) {
-            return { ...existingCourse, ...course };
-          }
-          return existingCourse;
+  getCourses(): Observable<Course[]> {
+    const courseRefCollection = collection(this.firestore, 'courses');
+    return collectionData(courseRefCollection, { idField: 'id' }).pipe(
+      map((courses: any[]) => {
+        return courses.map((course) => {
+          const startDate = (course.startDate as Timestamp).toDate();
+          const finalDate = (course.finalDate as Timestamp).toDate();
+          return { ...course, startDate, finalDate };
         });
-        this.courses$.next(updatedData);
-      }),
-      catchError(error => {
-        console.error('Error al editar los datos del curso:', error);
-        return throwError(() => new Error('Error al editar los datos del curso'));
       })
-    ).subscribe();
-  }
-
-  getCourseById(courseId: number): Observable<Course | undefined>{
-    return this.courses$.pipe(
-      map(courses => courses.find(course => course.id === courseId))
     );
   }
+
+
+  add(newCourse: Course){
+    const courseRefCollection =  collection(this.firestore, 'courses');
+    return addDoc(courseRefCollection, newCourse);
+  }
+
+
+  toDelete(courseId: string){
+    const courseDocRef = doc(this.firestore, 'courses', courseId);
+    return deleteDoc(courseDocRef);
+  }
+
+  toUpdate(course: Course, courseId: string){
+    const courseRef = doc(this.firestore, 'courses', courseId);
+    const dataEdited = {
+      title: course.title,
+      startDate: course.startDate,
+      finalDate: course.finalDate
+    };
+    return updateDoc(courseRef, dataEdited)
+  }
+
+  findCourseId(course: Course): Observable<{ id: string, data: Course } | null> {
+    const courseRefCollection = collection(this.firestore, 'courses');
+    const courseQuery = query(courseRefCollection, where('title', '==', course.title));
+    return from(getDocs(courseQuery)).pipe(
+      switchMap((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          const doc = querySnapshot.docs[0];
+          const courseData = doc.data() as Course;
+          return of({ id: doc.id, data: courseData });
+        } else {
+          return of(null);
+        }
+      }),
+      catchError((error) => {
+        console.error('Error al buscar el curso:', error);
+        return of(null);
+      })
+    );
+  }
+
+  findCourseById(courseId: string): Observable<Course | undefined>{
+    const courseRef = doc(this.firestore, 'admins', courseId);
+    return from(getDoc(courseRef)).pipe(
+      switchMap(docSnap => {
+        if (docSnap.exists()) {
+          const adminData = docSnap.data() as Course;
+          return of({ id: docSnap.id, ...adminData });
+        } else {
+          return of(undefined);
+        }
+      }),
+      catchError(error => {
+        console.error('Error al obtener el curso por ID:', error);
+        return of(undefined);
+      })
+    );
+  }
+
+
 }
 
 

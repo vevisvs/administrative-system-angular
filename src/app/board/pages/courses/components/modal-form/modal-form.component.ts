@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Course } from '../../models/course';
+import { Course } from '../../../../../core/services/course.service';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
  selector: 'app-modal-form',
@@ -32,10 +33,14 @@ export class ModalFormComponent implements OnInit {
   }
  }
 
- populateForm(data: Course): void {
-  const { title, startDate, finalDate } = data;
-  this.coursesForm.setValue({ title, startDate: startDate ? new Date(startDate) : null, finalDate: finalDate ? new Date(finalDate) : null });
- }
+  populateForm(data: Course): void {
+    const { title, startDate, finalDate } = data;
+    this.coursesForm.setValue({
+      title,
+      startDate: startDate ? new Date(startDate) : null,
+      finalDate: finalDate ? new Date(finalDate) : null
+    });
+  }
 
 getErrorMessage(controlName: string) {
   const control = this.coursesForm.get(controlName);
@@ -48,15 +53,25 @@ getErrorMessage(controlName: string) {
   return '';
 }
 
- submitForm(): void {
-  if (this.dataToEdit) {
-   const id = { id: this.data.id };
-   const dataUpdated = { ...this.coursesForm.value, ...id };
-   this.dialogRef.close(dataUpdated);
-  } else {
-   this.dialogRef.close(this.coursesForm.value);
+//  submitForm(): void {
+//   if (this.dataToEdit) {
+//     const startDate = this.data.startDate;
+//     const finalDate = this.data.finalDate;
+//    this.dialogRef.close({...this.coursesForm.value, startDate, finalDate});
+//   } else {
+//    this.dialogRef.close(this.coursesForm.value);
+//   }
+//  }
+  submitForm(): void {
+    const formData = this.coursesForm.value;
+    const startDate = formData.startDate ? Timestamp.fromDate(formData.startDate) : null;
+    const finalDate = formData.finalDate ? Timestamp.fromDate(formData.finalDate) : null;
+    if (this.dataToEdit) {
+      this.dialogRef.close({ ...formData, startDate, finalDate });
+    } else {
+      this.dialogRef.close({ ...formData, startDate, finalDate });
+    }
   }
- }
 }
 
 

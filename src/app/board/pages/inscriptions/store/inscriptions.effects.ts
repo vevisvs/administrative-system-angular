@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { CreateInscription, Inscription, InscriptionComplete } from '../models/inscription';
 import { Store } from '@ngrx/store';
 import { Users } from '../../users/models/users';
-import { Course } from '../../courses/models/course';
+import { Course } from '../../../../core/services/course.service';
 
 @Injectable()
 export class InscriptionsEffects {

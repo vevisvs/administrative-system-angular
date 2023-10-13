@@ -1,4 +1,4 @@
-import { Course } from "../../courses/models/course";
+import { Course } from "../../../../core/services/course.service";
 import { Users } from "../../users/models/users";
 
 export interface Inscription{

@@ -1,6 +1,6 @@
-export interface Course{
-  id?: number,
-  title: string | null,
-  startDate: Date | null,
-  finalDate: Date | null;
-}
+// export interface Course{
+//   id?: string,
+//   title: string | null,
+//   startDate: Timestamp | null,
+//   finalDate: Timestamp | null;
+// }

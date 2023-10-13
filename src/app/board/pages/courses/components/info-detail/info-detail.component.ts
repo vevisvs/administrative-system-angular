@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/core/services/course.service';
-import { Course } from '../../models/course';
+import { Course } from '../../.././../../core/services/course.service';
 
 @Component({
   selector: 'app-info-detail',
@@ -18,8 +18,8 @@ export class InfoDetailComponent {
     {
       const courseId = this.rutaActiva.snapshot.params['courseId'];
       if(courseId){
-        const convertId = Number(courseId)
-        this.courseService.getCourseById(convertId).subscribe({
+        // const convertId = Number(courseId)
+        this.courseService.findCourseById(courseId).subscribe({
           next: (value) =>
             this.courseDetail = value
         })

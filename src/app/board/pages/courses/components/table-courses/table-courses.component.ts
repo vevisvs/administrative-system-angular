@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output} from '@angular/core';
-import { Course } from '../../models/course';
+import { Course } from '../../../../../core/services/course.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({

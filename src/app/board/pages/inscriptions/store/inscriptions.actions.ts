@@ -2,7 +2,7 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { CreateInscription, Inscription, InscriptionComplete } from '../models/inscription';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Users } from '../../users/models/users';
-import { Course } from '../../courses/models/course';
+import { Course } from '../../../../core/services/course.service';
 
 export const InscriptionsActions = createActionGroup({
   source: 'Inscriptions',

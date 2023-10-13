@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Inscription } from '../../models/inscription';
 import { Users } from '../../../users/models/users';
-import { Course } from '../../../courses/models/course';
+import { Course } from '../../../../../core/services/course.service';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectCourses, selectUsers } from '../../store/inscriptions.selectors';
