@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { InscriptionsActions } from './store/inscriptions.actions';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Timestamp } from 'firebase/firestore';
 
 
 @Component({
@@ -36,6 +37,10 @@ export class InscriptionsComponent implements OnInit{
 
   deleteInscription(id: string): void{
     this.store.dispatch(InscriptionsActions.deleteInscription( {id} ));
+  }
+
+  convertTimestampToDate(timestamp: Timestamp): Date {
+    return timestamp.toDate();
   }
 
 }

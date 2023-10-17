@@ -3,14 +3,13 @@
   <form [formGroup]="inscriptionForm">
     <mat-form-field class="w-full">
       <mat-label>Alumno</mat-label>
-      <!-- <mat-select formControlName="userId">
+      <mat-select formControlName="userId">
         <mat-option [value]="alumno.id"  *ngFor="let alumno of  users$ | async">
           {{ alumno.name }} {{ alumno.lastname }}
         </mat-option>
-      </mat-select> -->
+      </mat-select>
       <mat-error *ngIf="inscriptionForm.get('userId')?.invalid">El campo es requerido</mat-error>
     </mat-form-field>
-
     <mat-form-field class="w-full">
       <mat-label>Curso</mat-label>
       <mat-select formControlName="courseId" >

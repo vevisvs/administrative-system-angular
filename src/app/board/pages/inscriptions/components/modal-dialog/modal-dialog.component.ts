@@ -5,9 +5,11 @@ import { Inscription } from '../../models/inscription';
 import { Users } from '../../../users/models/users';
 import { Course } from '../../../../../core/services/course.service';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { selectCourses, selectUsers } from '../../store/inscriptions.selectors';
 import { InscriptionsActions } from '../../store/inscriptions.actions';
+import { InscriptionComplete } from '../../models/inscription'; //agregue esta importacion
 
 @Component({
   selector: 'app-modal-dialog',
@@ -32,14 +34,23 @@ export class ModalDialogComponent{
       this.store.dispatch(InscriptionsActions.loadCourse());
   }
 
-  submitInfo(): void{
-    if(this.inscriptionForm.invalid){
+
+  submitInfo(): void {
+    if (this.inscriptionForm.invalid) {
       this.inscriptionForm.markAllAsTouched();
     } else {
-      this.store.dispatch(InscriptionsActions.createInscription({payload: this.inscriptionForm.getRawValue()}));
-      this.dialogRef.close()
+      this.users$.pipe(take(1)).subscribe(users => {
+        this.courses$.pipe(take(1)).subscribe(courses => {
+          const payload: InscriptionComplete = {
+            ...this.inscriptionForm.getRawValue(),
+            user: users,
+            course: courses
+          };
+          this.store.dispatch(InscriptionsActions.createInscription({ payload }));
+          this.dialogRef.close();
+        });
+      });
     }
-
   }
 }
 

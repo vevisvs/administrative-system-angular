@@ -4,8 +4,10 @@ import { ModalUsersComponent } from './components/modal-users/modal-users.compon
 import { Users } from './models/users';
 import { UserService } from 'src/app/core/services/user.service';
 import { Observable } from 'rxjs';
-import { createToken } from 'src/app/core/helpers/token-helper';
+import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Firestore, collectionData } from '@angular/fire/firestore';
+import { collection } from 'firebase/firestore';
 
 @Component({
   selector: 'app-users',
@@ -15,12 +17,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class UsersComponent {
 
   alumnos$: Observable<Users[]>;
-  totalUsers = 0;
+  totalUsers$: Observable<number>;
   public role: string;
 
-  constructor(public dialog: MatDialog, private userService: UserService, private auth: AuthService) {
+  constructor(public dialog: MatDialog, private userService: UserService, private auth: AuthService, private firestore: Firestore) {
       this.alumnos$ = this.userService.getUsers();
-      this.usersCount();
+      this.totalUsers$ = this.usersCount();
       this.role = this.auth.getUserType();
   };
 
@@ -63,8 +65,11 @@ export class UsersComponent {
     this.userService.onDelete(userId);
   }
 
-  async usersCount(): Promise<void>{
-    const total = await this.userService.getTotalUsersCount();
+  usersCount(): Observable<number>{
+    const usersCollection = collection(this.firestore, 'users');
+    return collectionData(usersCollection, { idField: 'id' }).pipe(
+      map(users => users.length)
+    );
   }
 
 }

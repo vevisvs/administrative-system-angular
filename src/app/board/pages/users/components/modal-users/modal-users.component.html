@@ -70,7 +70,7 @@
   </div>
 </div>
 <div mat-dialog-actions class="flex justify-content-end">
-  <button mat-raised-button color="accent" mat-dialog-close (click)="cancelar()">Cancelar</button> <!--directiva para cerrar modal-->
+  <button mat-raised-button color="accent" mat-dialog-close (click)="cancelar()">Cancelar</button>
   <button mat-raised-button color="primary" [disabled]="formUser.invalid" (click)="agregar()">{{ isEditMode ? 'Actualizar' : 'Agregar' }}</button>
 </div>
 

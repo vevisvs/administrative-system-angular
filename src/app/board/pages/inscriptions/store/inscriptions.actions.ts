@@ -12,7 +12,7 @@ export const InscriptionsActions = createActionGroup({
     'Load Inscriptions Failure': props<{error: HttpErrorResponse}>(),
 
     'Create Inscription': props<{ payload: CreateInscription}>(),
-    'Create Inscription Success': props<{ data: Inscription }>(),
+    'Create Inscription Success': props<{ data: InscriptionComplete }>(),
     'Create Inscription Failure': props<{ error: HttpErrorResponse }>(),
 
     'Delete Inscription': props<{ id: string }>(),

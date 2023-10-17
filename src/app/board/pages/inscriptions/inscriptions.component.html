@@ -17,7 +17,7 @@
   </ng-container>
   <ng-container matColumnDef="duration">
     <th mat-header-cell *matHeaderCellDef appFontsize>Período de cursada</th>
-    <td mat-cell *matCellDef="let inscription"> {{inscription?.course?.startDate | dateFormat}} - {{inscription?.course?.finalDate | dateFormat}}</td>
+    <td mat-cell *matCellDef="let inscription"> {{convertTimestampToDate(inscription?.course?.startDate) | date: 'MM/dd/YYYY'}} - {{convertTimestampToDate(inscription?.course?.finalDate) | date: 'MM/dd/YYYY'}}</td>
   </ng-container>
   <ng-container matColumnDef="options">
     <th mat-header-cell *matHeaderCellDef appFontsize>Acciones</th>

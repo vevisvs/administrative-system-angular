@@ -119,26 +119,5 @@
       "role": "Usuario"
     }
   ],
-  "inscriptions": [
-    {
-      "userId": 1693098798928,
-      "courseId": 4,
-      "id": 1
-    },
-    {
-      "userId": 1693447641271,
-      "courseId": 3,
-      "id": 2
-    },
-    {
-      "userId": 1693517075947,
-      "courseId": 5,
-      "id": 3
-    },
-    {
-      "userId": 1693516627181,
-      "courseId": 1,
-      "id": 4
-    }
-  ]
+  "inscriptions": []
 }
