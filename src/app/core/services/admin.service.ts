@@ -24,7 +24,6 @@ export class AdminService {
 
 
   addAdmin(userAdmin: Admin){
-    console.log("user a agregar en service:", userAdmin)
     const adminRef = collection(this.firestore, 'admins');
     return addDoc(adminRef, userAdmin)
   }
