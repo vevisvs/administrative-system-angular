@@ -9,24 +9,28 @@ import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-admins',
   templateUrl: './admins.component.html',
-  styleUrls: ['./admins.component.scss']
+  styleUrls: ['./admins.component.scss'],
 })
-export class AdminsComponent implements OnInit{
+export class AdminsComponent implements OnInit {
   dataAdmin: DialogData = {
-    name: "",
-    lastname:  "",
-    email:  "",
-    password: ""
-  }
+    name: '',
+    lastname: '',
+    email: '',
+    password: '',
+  };
 
   public role: string;
   admins$!: Observable<Admin[]>;
 
-  constructor(public dialog: MatDialog, private adminService: AdminService, private as: AuthService){
+  constructor(
+    public dialog: MatDialog,
+    private adminService: AdminService,
+    private as: AuthService
+  ) {
     this.role = this.as.getUserType();
   }
 
-  ngOnInit():void{
+  ngOnInit(): void {
     this.admins$ = this.adminService.getAdmins();
   }
 
@@ -34,13 +38,13 @@ export class AdminsComponent implements OnInit{
     const dialogRef = this.dialog.open(DialogComponent, {
       data: { data: this.dataAdmin },
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         const adminAdded = {
           ...result,
-          role: 'Administrador'
+          role: 'Administrador',
         };
-        console.log("Nuevo administrador:", adminAdded);
+        console.log('Nuevo administrador:', adminAdded);
         this.adminService.addAdmin(adminAdded).then(() => {
           this.admins$ = this.adminService.getAdmins();
         });
@@ -48,8 +52,8 @@ export class AdminsComponent implements OnInit{
     });
   }
 
-  delete(adminId: string): void{
-    this.adminService.deleteAdmin(adminId)
+  delete(adminId: string): void {
+    this.adminService.deleteAdmin(adminId);
   }
 
   edit(admin: Admin): void {

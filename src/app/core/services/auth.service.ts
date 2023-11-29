@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, map, from, of} from "rxjs";
+import { BehaviorSubject, Observable, map, from, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { loginData, loginRequest } from 'src/app/authentication/models/login';
@@ -10,13 +10,12 @@ import { AdminService } from './admin.service';
 import { UserService } from './user.service';
 import { Users } from 'src/app/board/pages/users/models/users';
 import { Admin } from 'src/app/board/pages/admins/models/admin';
-
+import { DocumentReference } from 'firebase/firestore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private _authAdmin$ = new BehaviorSubject<loginData | null>(null);
   public authAdmin$ = this._authAdmin$.asObservable();
   private invalidCredentials: boolean = false;
@@ -28,13 +27,11 @@ export class AuthService {
     private router: Router
   ) {}
 
-
   isAuth(userType: string): Observable<boolean> {
     return this.getCollections(userType).pipe(
-      map(usersResult => usersResult.length > 0)
+      map((usersResult) => usersResult.length > 0)
     );
   }
-
 
   getCollections(userType: string): Observable<Admin[] | Users[]> {
     if (userType === 'admin') {
@@ -43,7 +40,6 @@ export class AuthService {
       return this.us.getUsers();
     }
   }
-
 
   loginAdmin(payload: loginRequest, userType: string) {
     this.getCollections(userType)
@@ -67,12 +63,15 @@ export class AuthService {
             this.invalidCredentials = true;
             this._authAdmin$.next(null);
           }
-        }
+        },
       });
   }
 
   finder(payload: loginRequest, type: string): Observable<loginData | null> {
-    const ref = type === 'admin' ? collection(this.firestore, 'admins') : collection(this.firestore, 'users');
+    const ref =
+      type === 'admin'
+        ? collection(this.firestore, 'admins')
+        : collection(this.firestore, 'users');
     const q = query(ref, where('email', '==', payload.email));
     return from(getDocs(q)).pipe(
       switchMap((querySnapshot) => {
@@ -88,7 +87,7 @@ export class AuthService {
             phone: data['phone'],
             country: data['country'],
             token: data['token'],
-            role: data['role']
+            role: data['role'],
           };
           return of(authData);
         } else {
@@ -97,7 +96,6 @@ export class AuthService {
       })
     );
   }
-
 
   isInvalidCredentials(): boolean {
     return this.invalidCredentials;
@@ -115,7 +113,6 @@ export class AuthService {
     }
   }
 
-
   setUserType(userType: string): void {
     localStorage.setItem('userType', userType);
   }
@@ -123,6 +120,4 @@ export class AuthService {
   getUserType(): string {
     return localStorage.getItem('userType') || '';
   }
-
 }
-

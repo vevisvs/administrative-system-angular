@@ -12,7 +12,9 @@
       <mat-error>
         <div *ngIf="emailInvalid && emailTouched">
           <div *ngIf="emailErrors?.['required']">El email es requerido</div>
-          <div *ngIf="emailErrors?.['email']">El email debe tener un formato válido</div>
+          <div *ngIf="emailErrors?.['email']">
+            El email debe tener un formato válido
+          </div>
         </div>
       </mat-error>
     </mat-form-field>
@@ -23,7 +25,9 @@
       <input formControlName="password" type="password" matInput />
       <mat-error>
         <div *ngIf="passwordInvalid && (passwordDirty || passwordTouched)">
-          <div *ngIf="passwordErrors?.['required']">La contraseña es requerida</div>
+          <div *ngIf="passwordErrors?.['required']">
+            La contraseña es requerida
+          </div>
         </div>
       </mat-error>
     </mat-form-field>
@@ -36,8 +40,15 @@
         <mat-option value="user">Usuario</mat-option>
       </mat-select>
       <mat-error>
-        <div *ngIf="sesionForm.get('userType')?.invalid && sesionForm.get('userType')?.touched">
-          <div *ngIf="sesionForm.get('userType')?.hasError('required')">Debes seleccionar tu role</div>
+        <div
+          *ngIf="
+            sesionForm.get('userType')?.invalid &&
+            sesionForm.get('userType')?.touched
+          "
+        >
+          <div *ngIf="sesionForm.get('userType')?.hasError('required')">
+            Debes seleccionar tu role
+          </div>
         </div>
       </mat-error>
     </mat-form-field>

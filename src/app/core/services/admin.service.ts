@@ -1,39 +1,47 @@
 import { Injectable } from '@angular/core';
 import { Admin } from 'src/app/board/pages/admins/models/admin';
 import { BehaviorSubject, Observable, from, of } from 'rxjs';
-import { switchMap, catchError } from 'rxjs/operators';
-import { Firestore, collectionData, } from '@angular/fire/firestore';
-import { doc, collection, deleteDoc, addDoc, updateDoc, query, getDocs, getDoc, where } from '@firebase/firestore';
+import { switchMap, catchError, map } from 'rxjs/operators';
+import { Firestore, collectionData } from '@angular/fire/firestore';
+import {
+  doc,
+  collection,
+  deleteDoc,
+  addDoc,
+  updateDoc,
+  query,
+  getDocs,
+  getDoc,
+  where,
+} from '@firebase/firestore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminService {
-
   private adminUsers: Admin[] = [];
-  private administrators$: BehaviorSubject<Admin[]> = new BehaviorSubject<Admin[]>(this.adminUsers);
+  private administrators$: BehaviorSubject<Admin[]> = new BehaviorSubject<
+    Admin[]
+  >(this.adminUsers);
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore) {}
 
-
-  getAdmins(): Observable<Admin[]>{
+  getAdmins(): Observable<Admin[]> {
     const adminRef = collection(this.firestore, 'admins');
-		return collectionData(adminRef, {idField: 'id'
-		}) as Observable<Admin[]>;
+    return collectionData(adminRef, { idField: 'id' }) as Observable<Admin[]>;
   }
 
-
-  addAdmin(userAdmin: Admin){
+  addAdmin(userAdmin: Admin) {
     const adminRef = collection(this.firestore, 'admins');
-    return addDoc(adminRef, userAdmin)
+    return addDoc(adminRef, userAdmin);
   }
 
-  deleteAdmin(adminId: string){
+  deleteAdmin(adminId: string) {
     const adminRefDoc = doc(this.firestore, `admins/${adminId}`);
-		return deleteDoc(adminRefDoc);
+    return deleteDoc(adminRefDoc);
   }
 
-  findAdmin(admin: Admin): Observable<{ id: string, data: Admin } | null> {
+  findAdmin(admin: Admin): Observable<{ id: string; data: Admin } | null> {
     const adminRef = collection(this.firestore, 'admins');
     const adminQuery = query(adminRef, where('email', '==', admin.email));
     return from(getDocs(adminQuery)).pipe(
@@ -54,13 +62,13 @@ export class AdminService {
   }
 
   editAdmin(updatedAdmin: Admin, documentId: string): Promise<void> {
-    const adminRefDoc = doc(this.firestore, 'admins', documentId );
+    const adminRefDoc = doc(this.firestore, 'admins', documentId);
     const updatedData = {
       name: updatedAdmin.name,
       lastname: updatedAdmin.lastname,
       email: updatedAdmin.email,
       password: updatedAdmin.password,
-      role: updatedAdmin.role
+      role: updatedAdmin.role,
     };
     return updateDoc(adminRefDoc, updatedData);
   }
@@ -69,7 +77,7 @@ export class AdminService {
     const adminRefDoc = doc(this.firestore, 'admins', adminId);
 
     return from(getDoc(adminRefDoc)).pipe(
-      switchMap(docSnap => {
+      switchMap((docSnap) => {
         if (docSnap.exists()) {
           const adminData = docSnap.data() as Admin;
           return of({ id: docSnap.id, ...adminData });
@@ -77,11 +85,10 @@ export class AdminService {
           return of(undefined);
         }
       }),
-      catchError(error => {
+      catchError((error) => {
         console.error('Error al obtener el administrador por ID:', error);
         return of(undefined);
       })
     );
   }
-
 }
