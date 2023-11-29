@@ -9,7 +9,12 @@
 - PrimeFlex
 - RxJS
 - Feature Store NgRx 
-- Json-server
+- Firebase
+
+## Datos del user admin para ingresar a la plataforma:
+email: ve@example.com
+contraseña: 123456789
+role: administrador
 
 ## Contacto
 vevis.villalobos@gmail.com
